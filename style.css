@@ -2,6 +2,16 @@
 
 body {
   box-sizing: border-box;
+  font-family: "Futura", sans-serif;
+  margin: 70px 30px;
+}
+
+.title {
+  color: #0018A4;
+  font-weight: 700;
+  font-style: bold;
+  font-size: 64px;
+  margin-bottom: 70px;
 }
 
 .card-container {
