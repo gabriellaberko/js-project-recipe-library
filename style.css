@@ -1,1 +1,25 @@
 /* Link for design: https://www.figma.com/design/iagHnoc335DpzopYggwdEN/Figma-designs-for-students?node-id=122-56&p=f&t=YxJsBuzUcs0nn2Np-0" */
+
+body {
+  box-sizing: border-box;
+}
+
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 320px));
+  grid-gap: 12px;
+  justify-content: space-evenly;
+}
+
+.card {
+ border: 1px solid #E9E9E9;
+ border-radius: 16px;
+ padding: 12px;
+}
+
+.card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 12px;
+}
