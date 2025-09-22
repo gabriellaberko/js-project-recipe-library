@@ -12,14 +12,46 @@ body {
   font-weight: 700;
   font-style: bold;
   font-size: 64px;
-  margin-bottom: 70px;
+  margin-bottom: 52px;
+}
+
+.controls-container {
+  display: flex;
+  gap: 88px;
+  margin-bottom: 42px;
+}
+
+.btn {
+  border-radius: 50px;
+  padding: 8px 16px;
+  border: none;
+  color: #0018A4;
+}
+
+#filter-container .btn {
+  background-color: #CCFFE2;
+}
+
+#sort-container .btn {
+  background-color: #FFECEA;
+}
+
+#filter-container .btn.active {
+  background-color: #0018A4;
+  color: white;
+}
+
+#sort-container .btn.btn.active {
+  background-color: #FF6589;
+  color: white;
 }
 
 .card-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 320px));
-  grid-gap: 12px;
-  justify-content: space-evenly;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 420px));
+  grid-gap: 16px;
+  /*justify-content: space-evenly;*/
+  /*justify-content: flex-start;*/
 }
 
 .card {
@@ -41,4 +73,30 @@ body {
 .card:hover {
   border: 2px solid #0018A4;
   box-shadow: 0px 0px 30px 0px rgba(0, 24, 164, 0.2);
+}
+
+@media only screen and (max-width: 650px) {
+
+.title {
+  text-align:  center;
+  font-size: 52px;
+}
+
+.controls-container{
+  justify-content: center;
+}
+
+#filter-container,
+#sort-container {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 420px));
+  grid-gap: 16px;
+  justify-content: space-evenly;
+
 }
