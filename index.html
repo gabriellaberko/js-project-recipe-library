@@ -12,21 +12,29 @@
 <body>
   <h1 class="title">Recipe Library</h1>
   <div class="controls-container">
-    <div>
+    <div class="filter-container">
+      <div class="filter-kitchen-container">
         <h2>Filter on kitchen</h2>
-        <div id="filter-container">
-          <button class="btn active">All</button>
-          <button class="btn">Italian</button>
-          <button class="btn">American</button>
-          <button class="btn">Asian</button>
-        </div>
-    </div>
-    <div>
-      <h2>Sort on time</h2>
-      <div id="sort-container">
-        <button class="btn active">Descending</button>
-        <button class="btn">Ascending</button>
+        <button class="btn active">All</button>
+        <button class="btn">Asian</button>
+        <button class="btn">Italian</button>
+        <button class="btn">Mediterranean</button>
+        <button class="btn">Middle Eastern</button>
+        <button class="btn">Mexican</button>
       </div>
+      <div class="filter-diet-container">
+        <h2>Filter on diet</h2>
+        <button class="btn active">All</button>
+        <button class="btn">Vegan</button>
+        <button class="btn">Vegetarian</button>
+        <button class="btn">Gluten-free</button>
+        <button class="btn">Dairy-free</button>
+      </div>
+    </div>
+    <div class="sort-container">
+      <h2>Sort on popularity</h2>
+      <button class="btn active">Descending</button>
+      <button class="btn">Ascending</button>
     </div>
   </div>
   <div class="card-container">

@@ -17,8 +17,14 @@ body {
 
 .controls-container {
   display: flex;
-  gap: 88px;
+  flex-direction: column;
   margin-bottom: 42px;
+}
+
+.filter-container {
+  display: flex;
+  gap: 32px;
+  margin-bottom: 24px;
 }
 
 .btn {
@@ -28,30 +34,31 @@ body {
   color: #0018A4;
 }
 
-#filter-container .btn {
+.filter-kitchen-container .btn,
+.filter-diet-container .btn {
   background-color: #CCFFE2;
+  margin-bottom: 10px;
 }
 
-#sort-container .btn {
+.sort-container .btn {
   background-color: #FFECEA;
 }
 
-#filter-container .btn.active {
+.filter-kitchen-container .btn.active,
+.filter-diet-container .btn.active {
   background-color: #0018A4;
   color: white;
 }
 
-#sort-container .btn.btn.active {
+.sort-container .btn.btn.active {
   background-color: #FF6589;
   color: white;
 }
 
 .card-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 420px));
+  grid-template-columns: repeat(auto-fill, minmax(200px, 320px));
   grid-gap: 16px;
-  /*justify-content: space-evenly;*/
-  /*justify-content: flex-start;*/
 }
 
 .card {
@@ -75,6 +82,8 @@ body {
   box-shadow: 0px 0px 30px 0px rgba(0, 24, 164, 0.2);
 }
 
+
+/* For small screens */
 @media only screen and (max-width: 650px) {
 
 .title {
@@ -83,14 +92,24 @@ body {
 }
 
 .controls-container{
-  justify-content: center;
+  align-items: center;
 }
 
-#filter-container,
-#sort-container {
+.filter-kitchen-container,
+.filter-diet-container,
+.sort-container {
   display: flex;
   flex-direction: column;
   gap: 7px;
+}
+
+.filter-kitchen-container .btn,
+.filter-diet-container .btn {
+  margin-bottom: 0;
+}
+
+.sort-container {
+  justify-content: center;
 }
 
 .card-container {
