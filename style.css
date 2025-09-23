@@ -44,13 +44,13 @@ body {
   background-color: #FFECEA;
 }
 
-.filter-kitchen-container .btn.active,
-.filter-diet-container .btn.active {
+.filter-diet-container .active,
+.filter-kitchen-container .active {
   background-color: #0018A4;
   color: white;
 }
 
-.sort-container .btn.btn.active {
+.sort-container .active {
   background-color: #FF6589;
   color: white;
 }
@@ -87,7 +87,7 @@ body {
 @media only screen and (max-width: 650px) {
 
 .title {
-  text-align:  center;
+  text-align: center;
   font-size: 52px;
 }
 
@@ -117,5 +117,4 @@ body {
   grid-template-columns: repeat(auto-fill, minmax(200px, 420px));
   grid-gap: 16px;
   justify-content: space-evenly;
-
 }
