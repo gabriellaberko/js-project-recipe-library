@@ -18,14 +18,16 @@ body {
 .controls-container {
   display: flex;
   flex-direction: column;
-  margin-bottom: 42px;
+  margin-bottom: 62px;
 }
 
 .filter-container {
-  display: flex;
-  gap: 32px;
   margin-bottom: 24px;
 }
+/*
+.filter-container, .sort-container {
+  flex: 1;
+}*/
 
 .btn {
   border-radius: 50px;
@@ -34,8 +36,7 @@ body {
   color: #0018A4;
 }
 
-.filter-kitchen-container .btn,
-.filter-diet-container .btn {
+.filter-container .btn {
   background-color: #CCFFE2;
   margin-bottom: 10px;
 }
@@ -44,8 +45,7 @@ body {
   background-color: #FFECEA;
 }
 
-.filter-diet-container .active,
-.filter-kitchen-container .active {
+.filter-container .active {
   background-color: #0018A4;
   color: white;
 }
@@ -57,11 +57,12 @@ body {
 
 .card-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 320px));
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   grid-gap: 16px;
 }
 
 .card {
+height: 621px;
  border: 1px solid #E9E9E9;
  border-radius: 16px;
  padding: 12px;
@@ -91,25 +92,33 @@ body {
   font-size: 52px;
 }
 
-.controls-container{
+.controls-container {
+  display: flex;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
+  gap: 0;
 }
 
-.filter-kitchen-container,
-.filter-diet-container,
+.filter-container,
 .sort-container {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 7px;
 }
 
-.filter-kitchen-container .btn,
-.filter-diet-container .btn {
+.controls-container .btn {
   margin-bottom: 0;
+  /*width: 90%;*/
 }
 
-.sort-container {
+.filter-buttons-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
   justify-content: center;
+  
 }
 
 .card-container {
@@ -117,4 +126,14 @@ body {
   grid-template-columns: repeat(auto-fill, minmax(200px, 420px));
   grid-gap: 16px;
   justify-content: space-evenly;
+}
+}
+
+/* For wide screens */
+@media only screen and (min-width: 900px) {
+  
+  .controls-container{
+    flex-direction: row;
+    gap: 82px;
+  }
 }
