@@ -4,25 +4,35 @@
 const buttons = document.querySelectorAll(".btn");
 const filterButtons = document.querySelectorAll(".filter-container .btn");
 
+
 buttonText = "";
 
-
-
-function printButtonText(buttonText) {
-  if (buttonText === "All") {
-    console.log("You chose all")
-  } else if (buttonText === "Asian") {
-    console.log("You chose Asian");
-  } else if (buttonText === "Italian") {
-    console.log("You chose Italian");
-  } else if (buttonText === "Mediterranean") {
-    console.log("You chose Mediterranean");
-  } else if (buttonText === "Middle Eastern") {
-    console.log("You chose Middle Eastern");
-  } else if (buttonText === "Mexican") {
-    console.log("You chose Mexican");
-  }
+const addMessageToPlaceholder = message => {
+  const placeHolderCard = document.getElementById("placeholder");
+  const p = document.createElement("p");
+  p.textContent = message;
+  placeHolderCard.appendChild(p);
 }
+
+const createMessage = buttonText => {
+  const p = document.createElement("p");
+  if (buttonText === "All") {
+    addMessageToPlaceholder("You want it all?");
+  } else if (buttonText === "Asian") {
+    addMessageToPlaceholder("You choose Asian");
+  } else if (buttonText === "Italian") {
+    addMessageToPlaceholder("You choose Italian");
+  } else if (buttonText === "Mediterranean") {
+    addMessageToPlaceholder("You choose Mediterranean");
+  } else if (buttonText === "Middle Eastern") {
+    addMessageToPlaceholder("You choose Middle Eastern");
+  } else if (buttonText === "Mexican") {
+    addMessageToPlaceholder("You choose Mexican");
+  } else if (buttonText === "Descending") {
+    addMessageToPlaceholder("Looking for the most popular recepies?");
+  } else if (buttonText === "Ascending") {
+    addMessageToPlaceholder("The least popular recepies?");
+  }};
 
 /* 
 - Add an event listener for every button in the node list and toggle the class active on click 
@@ -32,7 +42,10 @@ buttons.forEach((button) => {
   button.addEventListener("click", () => {
     button.classList.toggle("active");
     const buttonText = button.innerText;
-    printButtonText(buttonText);
+    // Only call the create message function if button is active
+    if (button.classList.contains("active")) {
+      createMessage(buttonText); 
+    }
   });
 }); 
 
