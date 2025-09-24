@@ -3,7 +3,6 @@
 
 const buttons = document.querySelectorAll(".btn");
 const filterButtons = document.querySelectorAll(".filter-container .btn");
-const filterAllButton = document.getElementById("filter-all-button");
 const sortButtons = document.querySelectorAll(".sort-container .btn");
 
 
