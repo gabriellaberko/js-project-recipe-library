@@ -6,9 +6,6 @@ const filterButtons = document.querySelectorAll(".filter-container .btn");
 const sortButtons = document.querySelectorAll(".sort-container .btn");
 
 
-
-buttonText = "";
-
 const addMessageToPlaceholder = message => {
   const placeHolderCard = document.getElementById("placeholder");
   const p = document.createElement("p");
