@@ -5,7 +5,6 @@ const buttons = document.querySelectorAll(".btn");
 const filterButtons = document.querySelectorAll(".filter-container .btn");
 const sortButtons = document.querySelectorAll(".sort-container .btn");
 
-
 const addMessageToPlaceholder = message => {
   const placeHolderCard = document.getElementById("placeholder");
   const p = document.createElement("p");
@@ -75,3 +74,206 @@ sortButtons.forEach((sortButton) => {
   });
 }); 
 
+
+document.addEventListener("DOMContentLoaded", () => {
+  /* Call function */
+});
+
+const createRecipeCards = () => {
+  const cardDiv = document.createElement("div");
+  cardDiv.className = "card";
+  const cardImage = document.createElement("img");
+  const cardTitle = document.createElement("h2");
+  const recipeInfoDiv = document.createElement("div");
+  const cuisine = document.createElement("p");
+  const time = document.createElement("p");
+  const servings = document.createElement("p");
+  const popularity = document.createElement("p");
+  const ingredientsDiv = document.createElement("div");
+  const ingredientsTitle = document.createElement("h3");
+  const ingredientList = document.createElement("ul");
+}
+
+/* TO DO: create a function that takes the properties in recipies and put them in the created elements in createRecipeCards */
+
+const addRecipeInfo = () => {
+  recipes.forEachrecipe((recipe) => {
+    createRecipeCards();
+    cardImage.src = `${recipe.image}`;
+    cardTitle.textContent = `${recipe.title}`;
+    cuisine.textContent = `Cuisine: ${recipe.cuisine}`;
+    time.textContent = `Time: ${recipe.readyInMinutes}`;
+    servings.textContent = `Servings: ${recipe.servings}`;
+    popularity.textContent = `Popularity: ${recipe.popularity}`;
+    ingredientsTitle.textContent = `Ingredients:`;
+    ingredientList.textContent = `${recipe.ingredients}`;
+  });
+};
+
+/* TO DO: create a function that appends these element */
+
+const appendRecipeCardElements = () => {  
+};
+
+
+const recipes = [
+  {
+    id: 1,
+    title: "Vegan Lentil Soup",
+    image: "./baked-chicken.jpg",
+    readyInMinutes: 30,
+    servings: 4,
+    sourceUrl: "https://example.com/vegan-lentil-soup",
+    diets: ["vegan"],
+    cuisine: "Mediterranean",
+    ingredients: [
+      "red lentils",
+      "carrots",
+      "onion",
+      "garlic",
+      "tomato paste",
+      "cumin",
+      "paprika",
+      "vegetable broth",
+      "olive oil",
+      "salt"
+    ],
+    pricePerServing: 2.5,
+    popularity: 85
+  },
+  {
+    id: 2,
+    title: "Vegetarian Pesto Pasta",
+    image: "./baked-chicken.jpg",
+    readyInMinutes: 25,
+    servings: 2,
+    sourceUrl: "https://example.com/vegetarian-pesto-pasta",
+    diets: ["vegetarian"],
+    cuisine: "Italian",
+    ingredients: [
+      "pasta",
+      "basil",
+      "parmesan cheese",
+      "garlic",
+      "pine nuts",
+      "olive oil",
+      "salt",
+      "black pepper"
+    ],
+    pricePerServing: 3.0,
+    popularity: 92
+  },
+  {
+    id: 3,
+    title: "Gluten-Free Chicken Stir-Fry",
+    image: "./baked-chicken.jpg",
+    readyInMinutes: 20,
+    servings: 3,
+    sourceUrl: "https://example.com/gluten-free-chicken-stir-fry",
+    diets: ["gluten-free"],
+    cuisine: "Asian",
+    ingredients: [
+      "chicken breast",
+      "broccoli",
+      "bell pepper",
+      "carrot",
+      "soy sauce (gluten-free)",
+      "ginger",
+      "garlic",
+      "sesame oil",
+      "cornstarch",
+      "green onion",
+      "sesame seeds",
+      "rice"
+    ],
+    pricePerServing: 4.0,
+    popularity: 78
+  },
+  {
+    id: 4,
+    title: "Dairy-Free Tacos",
+    image: "./baked-chicken.jpg",
+    readyInMinutes: 15,
+    servings: 2,
+    sourceUrl: "https://example.com/dairy-free-tacos",
+    diets: ["dairy-free"],
+    cuisine: "Mexican",
+    ingredients: [
+      "corn tortillas",
+      "ground beef",
+      "taco seasoning",
+      "lettuce",
+      "tomato",
+      "avocado"
+    ],
+    pricePerServing: 2.8,
+    popularity: 88
+  },
+  {
+    id: 5,
+    title: "Middle Eastern Hummus",
+    image: "./baked-chicken.jpg",
+    readyInMinutes: 10,
+    servings: 4,
+    sourceUrl: "https://example.com/middle-eastern-hummus",
+    diets: ["vegan", "gluten-free"],
+    cuisine: "Middle Eastern",
+    ingredients: [
+      "chickpeas",
+      "tahini",
+      "garlic",
+      "lemon juice",
+      "olive oil"
+    ],
+    pricePerServing: 1.5,
+    popularity: 95
+  },
+  {
+    id: 6,
+    title: "Quick Avocado Toast",
+    image: "./baked-chicken.jpg",
+    readyInMinutes: 5,
+    servings: 1,
+    sourceUrl: "https://example.com/quick-avocado-toast",
+    diets: ["vegan"],
+    cuisine: "Mediterranean",
+    ingredients: [
+      "bread",
+      "avocado",
+      "lemon juice",
+      "salt"
+    ],
+    pricePerServing: 2.0,
+    popularity: 90
+  },
+  {
+    id: 7,
+    title: "Beef Stew",
+    image: "./baked-chicken.jpg",
+    readyInMinutes: 90,
+    servings: 5,
+    sourceUrl: "https://example.com/beef-stew",
+    diets: [],
+    cuisine: "European",
+    ingredients: [
+      "beef chunks",
+      "potatoes",
+      "carrots",
+      "onion",
+      "garlic",
+      "tomato paste",
+      "beef broth",
+      "red wine",
+      "bay leaves",
+      "thyme",
+      "salt",
+      "black pepper",
+      "butter",
+      "flour",
+      "celery",
+      "mushrooms"
+    ],
+    pricePerServing: 5.5,
+    popularity: 80
+  }
+]
