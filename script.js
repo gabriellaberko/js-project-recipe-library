@@ -1,7 +1,3 @@
-// TO DO: Limit to only pick one sorting button at a time
-// Make sure you cannot chose "All" and other filter options at the same time
-
-const buttons = document.querySelectorAll(".btn");
 const filterButtons = document.querySelectorAll(".filter-container .btn");
 const sortButtons = document.querySelectorAll(".sort-container .btn");
 
@@ -33,10 +29,10 @@ const createMessage = buttonText => {
   }};
 
 
-/* 
-- Add an event listener for every button in the node list and add the class "active" only on the clicked button
-- Get the clicked button's text and use it as an argument when calling the createMessage function
-*/
+
+// (1) add an event listener for every button in the node list and add the class "active" only on the clicked button
+// (2) get the clicked button's text and use it as an argument when calling the createMessage function
+
 
 filterButtons.forEach((filterButton) => {
   filterButton.addEventListener("click", () => {
@@ -129,7 +125,7 @@ const createRecipeCards = () => {
       const cardContainer = document.getElementById("card-container");
       cardContainer.appendChild(cardDiv);
     };
-  
+    
     appendRecipeCardElements();
     addRecipeInfoToElements();
     appendRecipeCard();
