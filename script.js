@@ -76,43 +76,64 @@ sortButtons.forEach((sortButton) => {
 
 
 document.addEventListener("DOMContentLoaded", () => {
-  /* Call function */
+  createRecipeCards();
 });
 
+
+// create a card for each recipe in the recipes array
 const createRecipeCards = () => {
-  const cardDiv = document.createElement("div");
-  cardDiv.className = "card";
-  const cardImage = document.createElement("img");
-  const cardTitle = document.createElement("h2");
-  const recipeInfoDiv = document.createElement("div");
-  const cuisine = document.createElement("p");
-  const time = document.createElement("p");
-  const servings = document.createElement("p");
-  const popularity = document.createElement("p");
-  const ingredientsDiv = document.createElement("div");
-  const ingredientsTitle = document.createElement("h3");
-  const ingredientList = document.createElement("ul");
-}
-
-/* TO DO: create a function that takes the properties in recipies and put them in the created elements in createRecipeCards */
-
-const addRecipeInfo = () => {
-  recipes.forEachrecipe((recipe) => {
-    createRecipeCards();
-    cardImage.src = `${recipe.image}`;
-    cardTitle.textContent = `${recipe.title}`;
-    cuisine.textContent = `Cuisine: ${recipe.cuisine}`;
-    time.textContent = `Time: ${recipe.readyInMinutes}`;
-    servings.textContent = `Servings: ${recipe.servings}`;
-    popularity.textContent = `Popularity: ${recipe.popularity}`;
-    ingredientsTitle.textContent = `Ingredients:`;
-    ingredientList.textContent = `${recipe.ingredients}`;
+  recipes.forEach((recipe) => {
+    // create all the elements for the card and store them in variables
+    const cardDiv = document.createElement("div");
+    cardDiv.className = "card";
+    const cardImage = document.createElement("img");
+    const cardTitle = document.createElement("h2");
+    const recipeInfoDiv = document.createElement("div");
+    const cuisine = document.createElement("p");
+    const time = document.createElement("p");
+    const servings = document.createElement("p");
+    const popularity = document.createElement("p");
+    const ingredientsDiv = document.createElement("div");
+    const ingredientsTitle = document.createElement("h3");
+    const ingredientList = document.createElement("ul")
+  
+    // append all the elements to the variable cardDiv
+    const appendRecipeCardElements = () => {  
+      cardDiv.appendChild(cardImage);
+      cardDiv.appendChild(cardTitle);
+      recipeInfoDiv.appendChild(cuisine);
+      recipeInfoDiv.appendChild(time);
+      recipeInfoDiv.appendChild(cuisine);
+      recipeInfoDiv.appendChild(servings);
+      recipeInfoDiv.appendChild(popularity);
+      cardDiv.appendChild(recipeInfoDiv);
+      ingredientsDiv.appendChild(ingredientsTitle);
+      ingredientsDiv.appendChild(ingredientList);
+      cardDiv.appendChild(ingredientsDiv);
+    };
+  
+    // take content from the recipes array and put them in all the recipe card elements
+    const addRecipeInfoToElements = () => {
+        cardImage.src = `${recipe.image}`;
+        cardTitle.textContent = `${recipe.title}`;
+        cuisine.textContent = `Cuisine: ${recipe.cuisine}`;
+        time.textContent = `Time: ${recipe.readyInMinutes}`;
+        servings.textContent = `Servings: ${recipe.servings}`;
+        popularity.textContent = `Popularity: ${recipe.popularity}`;
+        ingredientsTitle.textContent = `Ingredients:`;
+        ingredientList.textContent = `${recipe.ingredients}`;
+    };
+  
+    // append the variable cardDiv to the card-container div in the DOM
+    const appendRecipeCard = () => {  
+      const cardContainer = document.getElementById("card-container");
+      cardContainer.appendChild(cardDiv);
+    };
+  
+    appendRecipeCardElements();
+    addRecipeInfoToElements();
+    appendRecipeCard();
   });
-};
-
-/* TO DO: create a function that appends these element */
-
-const appendRecipeCardElements = () => {  
 };
 
 
