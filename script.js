@@ -91,7 +91,7 @@ const createRecipeCards = () => {
     const popularity = document.createElement("p");
     const ingredientsDiv = document.createElement("div");
     const ingredientsTitle = document.createElement("h3");
-    const ingredientList = document.createElement("ul")
+    const ingredientList = document.createElement("ul");
   
     // append all the elements to the variable cardDiv
     const appendRecipeCardElements = () => {  
@@ -117,7 +117,13 @@ const createRecipeCards = () => {
         servings.textContent = `Servings: ${recipe.servings}`;
         popularity.textContent = `Popularity: ${recipe.popularity}`;
         ingredientsTitle.textContent = `Ingredients:`;
-        ingredientList.textContent = `${recipe.ingredients}`;
+        // for each recipe in the recipe array - loop through the array of ingredients and: (1) create a new li element and add each ingredient it (eachIngredient variable)
+        recipe.ingredients.forEach((ing) => {
+          const eachIngredient = document.createElement("li");
+          eachIngredient.textContent = ing;
+          ingredientList.appendChild(eachIngredient);
+          
+        });
     };
   
     // append the variable cardDiv to the card-container div in the DOM
