@@ -1,42 +1,62 @@
 const filterButtons = document.querySelectorAll(".filter-container .btn");
 const sortButtons = document.querySelectorAll(".sort-container .btn");
 
-const addMessageToPlaceholder = message => {
-  const placeHolderCard = document.getElementById("placeholder");
-  const p = document.createElement("p");
-  p.textContent = message;
-  placeHolderCard.appendChild(p);
-}
+// const addMessageToPlaceholder = message => {
+//   const placeHolderCard = document.getElementById("placeholder");
+//   const p = document.createElement("p");
+//   p.textContent = message;
+//   placeHolderCard.appendChild(p);
+// }
 
-const createMessage = buttonText => {
-  const p = document.createElement("p");
-  if (buttonText === "All") {
-    addMessageToPlaceholder("You want it all?");
-  } else if (buttonText === "Asian") {
-    addMessageToPlaceholder("You choose Asian");
-  } else if (buttonText === "Italian") {
-    addMessageToPlaceholder("You choose Italian");
-  } else if (buttonText === "Mediterranean") {
-    addMessageToPlaceholder("You choose Mediterranean");
-  } else if (buttonText === "Middle Eastern") {
-    addMessageToPlaceholder("You choose Middle Eastern");
-  } else if (buttonText === "Mexican") {
-    addMessageToPlaceholder("You choose Mexican");
-  } else if (buttonText === "Descending") {
-    addMessageToPlaceholder("Looking for the most popular recepies?");
-  } else if (buttonText === "Ascending") {
-    addMessageToPlaceholder("The least popular recepies?");
-  }
-};
+// const createMessage = buttonText => {
+//   const p = document.createElement("p");
+//   if (buttonText === "All") {
+//     addMessageToPlaceholder("You want it all?");
+//   } else if (buttonText === "Asian") {
+//     addMessageToPlaceholder("You choose Asian");
+//   } else if (buttonText === "Italian") {
+//     addMessageToPlaceholder("You choose Italian");
+//   } else if (buttonText === "Mediterranean") {
+//     addMessageToPlaceholder("You choose Mediterranean");
+//   } else if (buttonText === "Middle Eastern") {
+//     addMessageToPlaceholder("You choose Middle Eastern");
+//   } else if (buttonText === "Mexican") {
+//     addMessageToPlaceholder("You choose Mexican");
+//   } else if (buttonText === "Descending") {
+//     addMessageToPlaceholder("Looking for the most popular recepies?");
+//   } else if (buttonText === "Ascending") {
+//     addMessageToPlaceholder("The least popular recepies?");
+//   }
+// };
 
-// TO DO: create a function for sorting cards: ascending or descending
 
+// sort cards on popularity score
 const sortCards = buttonText => {
-  if (buttonText === "Descending") {
-    addMessageToPlaceholder("Looking for the most popular recepies?");
-  } else if (buttonText === "Ascending") {
-    addMessageToPlaceholder("The least popular recepies?");
-  }
+  
+  // create an array of the cards
+  const cardArray = [...document.querySelectorAll(".card")];
+
+  // get the popularity of each card
+  const getPopularity = (card) => {
+    const text = card.querySelector(".popularity").textContent;
+     // extract and return the number from it
+    const number = text.match(/\d+/);
+    return number ? parseInt(number[0], 10) : 0;
+  };
+
+    cardArray.sort((a, b) => {
+    if (buttonText === "Descending") {
+      return getPopularity(b) - getPopularity(a);
+    } else if (buttonText === "Ascending") {
+      return getPopularity(a) - getPopularity(b);
+    }
+    });
+
+    // re-append the cards in sorted order
+    const container = document.getElementById("card-container");
+    cardArray.forEach((card) => 
+      container.appendChild(card)
+    );
 };
 
 
@@ -75,7 +95,7 @@ sortButtons.forEach((sortButton) => {
     const buttonText = sortButton.innerText;
     // only call the create message function if button is active
     if (sortButton.classList.contains("active")) {
-      createMessage(buttonText); 
+      sortCards(buttonText);
     }
   });
 }); 
@@ -104,7 +124,7 @@ const createRecipeCards = () => {
         <p><b>Cuisine:</b> ${recipe.cuisine}</p>
         <p><b>Time:</b> ${recipe.readyInMinutes} min</p>
         <p><b>Servings:</b> ${recipe.servings}</p>
-        <p><b>Popularity:</b> ${recipe.popularity}</p>
+        <p class="popularity"><b>Popularity:</b> ${recipe.popularity}</p>
       </div>
       <div class="ingredients">
         <h3>Ingredients:</h3>
