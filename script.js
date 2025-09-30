@@ -85,11 +85,13 @@ const createRecipeCards = () => {
     const cardImage = document.createElement("img");
     const cardTitle = document.createElement("h2");
     const recipeInfoDiv = document.createElement("div");
+    recipeInfoDiv.className = "recipe-information";
     const cuisine = document.createElement("p");
     const time = document.createElement("p");
     const servings = document.createElement("p");
     const popularity = document.createElement("p");
     const ingredientsDiv = document.createElement("div");
+    ingredientsDiv.className = "ingredients";
     const ingredientsTitle = document.createElement("h3");
     const ingredientList = document.createElement("ul");
   
@@ -112,10 +114,10 @@ const createRecipeCards = () => {
     const addRecipeInfoToElements = () => {
         cardImage.src = `${recipe.image}`;
         cardTitle.textContent = `${recipe.title}`;
-        cuisine.textContent = `Cuisine: ${recipe.cuisine}`;
-        time.textContent = `Time: ${recipe.readyInMinutes}`;
-        servings.textContent = `Servings: ${recipe.servings}`;
-        popularity.textContent = `Popularity: ${recipe.popularity}`;
+        cuisine.innerHTML = `<b>Cuisine:</b> ${recipe.cuisine}`;
+        time.innerHTML = `<b>Time:</b> ${recipe.readyInMinutes} min`;
+        servings.innerHTML = `<b>Servings:</b> ${recipe.servings}`;
+        popularity.innerHTML = `<b>Popularity:</b> ${recipe.popularity}`;
         ingredientsTitle.textContent = `Ingredients:`;
         // for each recipe in the recipe array - loop through the array of ingredients and: (1) create a new li element and add each ingredient it (eachIngredient variable)
         recipe.ingredients.forEach((ing) => {
