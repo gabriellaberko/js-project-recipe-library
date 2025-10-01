@@ -160,6 +160,9 @@ const recipes = [
   }
 ]
 
+let activeFilters = [];
+
+const allButtons = document.querySelectorAll(".btn");
 const filterButtons = document.querySelectorAll(".filter-container .btn");
 const sortButtons = document.querySelectorAll(".sort-container .btn");
 const randomButton = document.getElementById("random-button");
@@ -167,13 +170,11 @@ const randomButton = document.getElementById("random-button");
 
 
 
-const showRecipeCards = (recipeArray, reset = true) => {
+const showRecipeCards = (recipeArray) => {
   
   const cardContainer = document.getElementById("card-container");
-  //if reset is true (as is the default parameter value for the function), reset card container before filling it
-  if (reset) {
-    cardContainer.innerHTML = "";
-  }
+  //reset card container before filling it
+  cardContainer.innerHTML = "";
 
   recipeArray.forEach((recipe) => {
 
@@ -210,34 +211,18 @@ const showRecipeCards = (recipeArray, reset = true) => {
   });
 };
 
-// TO DO: handle multiple acitive filters
 
-const filterCardsOnKitchen = buttonText => {
-  if (buttonText === "All") {
+const filterCardsOnKitchen = activeFilters => {
+  // if there is no active filters (all button is active), or in case activeFilters is undefined
+  if (!activeFilters || activeFilters.length === 0)  {
     showRecipeCards(recipes);
   } else {
-    const filteredCards = recipes.filter(recipe =>
-    recipe.cuisine === buttonText);
+    const filteredCards = recipes.filter(recipe => 
+      activeFilters.includes(recipe.cuisine)
+    );
     showRecipeCards(filteredCards);
   }
-  
-  // if (buttonText === "Asian") {
-  //   showRecipeCards(fil)
-  // } else if (buttonText === "Italian") {
-    
-  // } else if (buttonText === "Mediterranean") {
-    
-  // } else if (buttonText === "Middle Eastern") {
-    
-  // } else if (buttonText === "Mexican") {
-    
-  // } else if (buttonText === "Descending") {
-    
-  // } else if (buttonText === "Ascending") {
-  
-  
 };
-
 
 
 const sortCardsOnPopularity = buttonText => {
@@ -267,7 +252,6 @@ const sortCardsOnPopularity = buttonText => {
 };
 
 
-
 const randomizeCard = () => {
   const randomIndex = Math.floor(Math.random() * recipes.length);
   const randomRecipe = recipes[randomIndex];
@@ -275,7 +259,16 @@ const randomizeCard = () => {
 }
 
 
-
+const handleActiveFilters = (buttonText, buttonIsActive) => {
+  if(buttonText === "All") {
+    activeFilters = [];
+  } else if(buttonIsActive) {
+    activeFilters.push(buttonText);
+  } else {
+    activeFilters = activeFilters.filter(activeFilter => activeFilter !== buttonText);
+  }
+  return activeFilters;
+}
 
 
 
@@ -284,27 +277,29 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-// (1) add an event listener for every button in the node list and add the class "active" only on the clicked button
-// (2) get the clicked button's text and use it as an argument when calling the createMessage function
-
 
 filterButtons.forEach((filterButton) => {
   filterButton.addEventListener("click", () => {
     const buttonText = filterButton.innerText;
+    
     // if the clicked button is "All", remove the class "active" from all the other buttons
     if(buttonText === "All") {
-      filterButtons.forEach((filterButton) => filterButton.classList.remove("active"));
+      allButtons.forEach((button) => button.classList.remove("active"));
       filterButton.classList.add("active");
     // if the clicked button is any other, remove the class "active" from the filterAllButton and toggle the class on the clicked button
     } else if(buttonText !== "All") {
       const filterAllButton = document.getElementById("filter-all-button");
       filterAllButton.classList.remove("active");
       filterButton.classList.toggle("active");
+      // remove "active" from sorting buttons or random button, in case they are active
+      sortButtons.forEach((sortButton) => sortButton.classList.remove("active"));
+      randomButton.classList.remove("active");
     }
-    // only call the filterCards function if button is clicked to active
-    if (filterButton.classList.contains("active")) {
-      filterCardsOnKitchen(buttonText); 
-    }
+
+    const buttonIsActive = filterButton.classList.contains("active");
+
+    handleActiveFilters(buttonText, buttonIsActive);
+    filterCardsOnKitchen(activeFilters);
   });
 }); 
 
@@ -325,8 +320,9 @@ sortButtons.forEach((sortButton) => {
 }); 
 
 
-
   randomButton.addEventListener("click", () => {
+    // remove the class "active" from all buttons
+    allButtons.forEach((button) => button.classList.remove("active"));
     randomButton.classList.toggle("active");
 
     if(randomButton.classList.contains("active")) {
