@@ -100,6 +100,12 @@ body {
   box-shadow: 0px 0px 30px 0px rgba(0, 24, 164, 0.2);
 }
 
+.filter-error-message {
+  background-color: #ffffff;
+  box-shadow: 0 0 5px rgb(193, 193, 193);
+  padding: 20px;
+}
+
 
 /* For small screens */
 @media only screen and (max-width: 650px) {

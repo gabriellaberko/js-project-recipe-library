@@ -31,7 +31,7 @@ const recipes = [
     servings: 2,
     sourceUrl: "https://example.com/vegetarian-pesto-pasta",
     diets: ["vegetarian"],
-    cuisine: "Italian",
+    cuisine: "Itallian",
     ingredients: [
       "pasta",
       "basil",
@@ -176,6 +176,10 @@ const showRecipeCards = (recipeArray) => {
   //reset card container before filling it
   cardContainer.innerHTML = "";
 
+  if(!recipeArray || recipeArray.length === 0) {
+    cardContainer.innerHTML = `<p class="filter-error-message">Oh no!🥲 Unfortunately there are no recipes matching your current filter. Try another one!</p>`;
+  }
+
   recipeArray.forEach((recipe) => {
 
     const card = document.createElement("div");
@@ -213,11 +217,13 @@ const showRecipeCards = (recipeArray) => {
 
 
 const filterCardsOnKitchen = activeFilters => {
+
   // if there is no active filters (all button is active), or in case activeFilters is undefined
   if (!activeFilters || activeFilters.length === 0)  {
+    const filteredCards = [];
     showRecipeCards(recipes);
   } else {
-    const filteredCards = recipes.filter(recipe => 
+    filteredCards = recipes.filter(recipe => 
       activeFilters.includes(recipe.cuisine)
     );
     showRecipeCards(filteredCards);
