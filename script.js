@@ -31,7 +31,7 @@ const recipes = [
     servings: 2,
     sourceUrl: "https://example.com/vegetarian-pesto-pasta",
     diets: ["vegetarian"],
-    cuisine: "Itallian",
+    cuisine: "Italian",
     ingredients: [
       "pasta",
       "basil",
