@@ -1,227 +1,3 @@
-const filterButtons = document.querySelectorAll(".filter-container .btn");
-const sortButtons = document.querySelectorAll(".sort-container .btn");
-
-// const addMessageToPlaceholder = message => {
-//   const placeHolderCard = document.getElementById("placeholder");
-//   const p = document.createElement("p");
-//   p.textContent = message;
-//   placeHolderCard.appendChild(p);
-// }
-
-// const createMessage = buttonText => {
-//   const p = document.createElement("p");
-//   if (buttonText === "All") {
-//     addMessageToPlaceholder("You want it all?");
-//   } else if (buttonText === "Asian") {
-//     addMessageToPlaceholder("You choose Asian");
-//   } else if (buttonText === "Italian") {
-//     addMessageToPlaceholder("You choose Italian");
-//   } else if (buttonText === "Mediterranean") {
-//     addMessageToPlaceholder("You choose Mediterranean");
-//   } else if (buttonText === "Middle Eastern") {
-//     addMessageToPlaceholder("You choose Middle Eastern");
-//   } else if (buttonText === "Mexican") {
-//     addMessageToPlaceholder("You choose Mexican");
-//   } else if (buttonText === "Descending") {
-//     addMessageToPlaceholder("Looking for the most popular recepies?");
-//   } else if (buttonText === "Ascending") {
-//     addMessageToPlaceholder("The least popular recepies?");
-//   }
-// };
-
-
-// sort cards on popularity score
-const sortCards = buttonText => {
-  
-  // create an array of the cards
-  const cardArray = [...document.querySelectorAll(".card")];
-
-  // get the popularity of each card
-  const getPopularity = (card) => {
-    const text = card.querySelector(".popularity").textContent;
-     // extract and return the number from it
-    const number = text.match(/\d+/);
-    return number ? parseInt(number[0], 10) : 0;
-  };
-
-    cardArray.sort((a, b) => {
-    if (buttonText === "Descending") {
-      return getPopularity(b) - getPopularity(a);
-    } else if (buttonText === "Ascending") {
-      return getPopularity(a) - getPopularity(b);
-    }
-    });
-
-    // re-append the cards in sorted order
-    const container = document.getElementById("card-container");
-    cardArray.forEach((card) => 
-      container.appendChild(card)
-    );
-};
-
-
-// (1) add an event listener for every button in the node list and add the class "active" only on the clicked button
-// (2) get the clicked button's text and use it as an argument when calling the createMessage function
-
-
-filterButtons.forEach((filterButton) => {
-  filterButton.addEventListener("click", () => {
-    const buttonText = filterButton.innerText;
-    // if the clicked button is "All", remove the class "active" from all the other buttons
-    if(buttonText === "All") {
-      filterButtons.forEach((filterButton) => filterButton.classList.remove("active"));
-      filterButton.classList.add("active");
-    // if the clicked button is any other, remove the class "active" from the filterAllButton and toggle the class on the clicked button
-    } else if(buttonText !== "All") {
-      const filterAllButton = document.getElementById("filter-all-button");
-      filterAllButton.classList.remove("active");
-      filterButton.classList.toggle("active");
-    }
-    // only call the create message function if button is active
-    if (filterButton.classList.contains("active")) {
-      createMessage(buttonText); 
-    }
-  });
-}); 
-
-
-sortButtons.forEach((sortButton) => {
-  sortButton.addEventListener("click", () => {
-    // remove the class 'active' from all sort buttons
-    sortButtons.forEach((sortButton) => sortButton.classList.remove("active"));
-    // add the class 'active' to the clicked sort button
-    sortButton.classList.add("active");
-    
-    const buttonText = sortButton.innerText;
-    // only call the create message function if button is active
-    if (sortButton.classList.contains("active")) {
-      sortCards(buttonText);
-    }
-  });
-}); 
-
-
-document.addEventListener("DOMContentLoaded", () => {
-  createRecipeCards();
-});
-
-const createRecipeCards = () => {
-  
-  const cardContainer = document.getElementById("card-container");
-  //reset card container before filling it
-  cardContainer.innerHTML = "";
-
-  recipes.forEach((recipe) => {
-
-    const card = document.createElement("div");
-    card.classList.add("card");
-
-    // create elements in each card with content from each recipe
-    card.innerHTML += `
-      <img src=${recipe.image} alt=${recipe.title}>
-      <h2>${recipe.title}</h2>
-      <div class="recipe-information">
-        <p><b>Cuisine:</b> ${recipe.cuisine}</p>
-        <p><b>Time:</b> ${recipe.readyInMinutes} min</p>
-        <p><b>Servings:</b> ${recipe.servings}</p>
-        <p class="popularity"><b>Popularity:</b> ${recipe.popularity}</p>
-      </div>
-      <div class="ingredients">
-        <h3>Ingredients:</h3>
-        <ul class="ingredient-list"></ul>
-      </div>
-    `
-    const ingredientList = card.querySelector(".ingredient-list");
-    
-    // create a <li> for every ingredient in each recipe and append it to the ingredient list in the card
-    recipe.ingredients.forEach((ing) => {
-      const eachIngredient = document.createElement("li");
-      eachIngredient.textContent = ing;
-      ingredientList.appendChild(eachIngredient);       
-   });
-
-   // append the card to the card container
-   cardContainer.appendChild(card);
-  });
-};
-
-
-// const getIngredientList = () => {
-// recipes.ingredients.forEach((ing) => {
-//   const ingredientList = 
-//   //const eachIngredient = document.createElement("li");
-//   //return eachIngredient;
-//   //eachIngredient.textContent = ing;
-//   //ingredientList.appendChild(eachIngredient);
-            
-// });
-// };
-
-// // create a card for each recipe in the recipes array
-// const createRecipeCards = () => {
-//   recipes.forEach((recipe) => {
-//     // create all the elements for the card and store them in variables
-//     const cardDiv = document.createElement("div");
-//     cardDiv.className = "card";
-//     const cardImage = document.createElement("img");
-//     const cardTitle = document.createElement("h2");
-//     const recipeInfoDiv = document.createElement("div");
-//     recipeInfoDiv.className = "recipe-information";
-//     const cuisine = document.createElement("p");
-//     const time = document.createElement("p");
-//     const servings = document.createElement("p");
-//     const popularity = document.createElement("p");
-//     const ingredientsDiv = document.createElement("div");
-//     ingredientsDiv.className = "ingredients";
-//     const ingredientsTitle = document.createElement("h3");
-//     const ingredientList = document.createElement("ul");
-  
-//     // append all the elements to the variable cardDiv
-//     const appendRecipeCardElements = () => {  
-//       cardDiv.appendChild(cardImage);
-//       cardDiv.appendChild(cardTitle);
-//       recipeInfoDiv.appendChild(cuisine);
-//       recipeInfoDiv.appendChild(time);
-//       recipeInfoDiv.appendChild(cuisine);
-//       recipeInfoDiv.appendChild(servings);
-//       recipeInfoDiv.appendChild(popularity);
-//       cardDiv.appendChild(recipeInfoDiv);
-//       ingredientsDiv.appendChild(ingredientsTitle);
-//       ingredientsDiv.appendChild(ingredientList);
-//       cardDiv.appendChild(ingredientsDiv);
-//     };
-  
-//     // take content from the recipes array and put them in all the recipe card elements
-//     const addRecipeInfoToElements = () => {
-//         cardImage.src = `${recipe.image}`;
-//         cardTitle.textContent = `${recipe.title}`;
-//         cuisine.innerHTML = `<b>Cuisine:</b> ${recipe.cuisine}`;
-//         time.innerHTML = `<b>Time:</b> ${recipe.readyInMinutes} min`;
-//         servings.innerHTML = `<b>Servings:</b> ${recipe.servings}`;
-//         popularity.innerHTML = `<b>Popularity:</b> ${recipe.popularity}`;
-//         ingredientsTitle.textContent = `Ingredients:`;
-//         // for each recipe in the recipe array - loop through the array of ingredients and: (1) create a new li element and add each ingredient it (eachIngredient variable)
-//         recipe.ingredients.forEach((ing) => {
-//           const eachIngredient = document.createElement("li");
-//           eachIngredient.textContent = ing;
-//           ingredientList.appendChild(eachIngredient);
-          
-//         });
-//     };
-  
-//     // append the variable cardDiv to the card-container div in the DOM
-//     const appendRecipeCard = () => {  
-//       const cardContainer = document.getElementById("card-container");
-//       cardContainer.appendChild(cardDiv);
-//     };
-    
-//     appendRecipeCardElements();
-//     addRecipeInfoToElements();
-//     appendRecipeCard();
-//   });
-// };
-
-
 const recipes = [
   {
     id: 1,
@@ -383,3 +159,166 @@ const recipes = [
     popularity: 80
   }
 ]
+
+const filterButtons = document.querySelectorAll(".filter-container .btn");
+const sortButtons = document.querySelectorAll(".sort-container .btn");
+const randomButton = document.getElementById("random-button");
+
+
+// const createMessage = buttonText => {
+//   const p = document.createElement("p");
+//   if (buttonText === "All") {
+//     addMessageToPlaceholder("You want it all?");
+//   } else if (buttonText === "Asian") {
+//     addMessageToPlaceholder("You choose Asian");
+//   } else if (buttonText === "Italian") {
+//     addMessageToPlaceholder("You choose Italian");
+//   } else if (buttonText === "Mediterranean") {
+//     addMessageToPlaceholder("You choose Mediterranean");
+//   } else if (buttonText === "Middle Eastern") {
+//     addMessageToPlaceholder("You choose Middle Eastern");
+//   } else if (buttonText === "Mexican") {
+//     addMessageToPlaceholder("You choose Mexican");
+//   } else if (buttonText === "Descending") {
+//     addMessageToPlaceholder("Looking for the most popular recepies?");
+//   } else if (buttonText === "Ascending") {
+//     addMessageToPlaceholder("The least popular recepies?");
+//   }
+// };
+
+
+const showRecipeCards = (recipeArray) => {
+  
+  const cardContainer = document.getElementById("card-container");
+  //reset card container before filling it
+  cardContainer.innerHTML = "";
+
+  recipeArray.forEach((recipe) => {
+
+    const card = document.createElement("div");
+    card.classList.add("card");
+
+    // create elements in each card with content from each recipe
+    card.innerHTML += `
+      <img src=${recipe.image} alt=${recipe.title}>
+      <h3>${recipe.title}</h3>
+      <hr class="solid"
+      <div class="recipe-information">
+        <p><b>Cuisine:</b> ${recipe.cuisine}</p>
+        <p><b>Time:</b> ${recipe.readyInMinutes} min</p>
+        <p class="popularity"><b>Popularity:</b> ${recipe.popularity}</p>
+      </div>
+      <hr class="solid">
+      <div class="ingredients">
+        <h4>Ingredients:</h4>
+        <ul class="ingredient-list"></ul>
+      </div>
+    `
+    
+    // create a <li> for every ingredient in each recipe and append it to the ingredient list in the card
+    recipe.ingredients.forEach((ing) => {
+      const eachIngredient = document.createElement("li");
+      eachIngredient.textContent = ing;
+      const ingredientList = card.querySelector(".ingredient-list");
+      ingredientList.appendChild(eachIngredient);       
+  });
+
+   // append the card to the card container
+   cardContainer.appendChild(card);
+  });
+};
+
+
+// sort cards on popularity score
+
+const sortCards = buttonText => {
+  // create an array of the cards
+  const cardArray = [...document.querySelectorAll(".card")];
+  // get the popularity of each card
+  const getPopularity = (card) => {
+    const text = card.querySelector(".popularity").textContent;
+     // extract and return the number from it
+    const number = text.match(/\d+/);
+    return number ? parseInt(number[0], 10) : 0;
+  };
+
+    cardArray.sort((a, b) => {
+    if (buttonText === "Descending") {
+      return getPopularity(b) - getPopularity(a);
+    } else if (buttonText === "Ascending") {
+      return getPopularity(a) - getPopularity(b);
+    }
+    });
+
+    // re-append the cards in sorted order
+    const cardContainer = document.getElementById("card-container");
+    cardArray.forEach((card) => 
+      cardContainer.appendChild(card)
+    );
+};
+
+
+
+const randomizeCard = () => {
+  const randomIndex = Math.floor(Math.random() * recipes.length);
+  const randomRecipe = recipes[randomIndex];
+  showRecipeCards([randomRecipe]);
+}
+
+
+// (1) add an event listener for every button in the node list and add the class "active" only on the clicked button
+// (2) get the clicked button's text and use it as an argument when calling the createMessage function
+
+
+filterButtons.forEach((filterButton) => {
+  filterButton.addEventListener("click", () => {
+    const buttonText = filterButton.innerText;
+    // if the clicked button is "All", remove the class "active" from all the other buttons
+    if(buttonText === "All") {
+      filterButtons.forEach((filterButton) => filterButton.classList.remove("active"));
+      filterButton.classList.add("active");
+    // if the clicked button is any other, remove the class "active" from the filterAllButton and toggle the class on the clicked button
+    } else if(buttonText !== "All") {
+      const filterAllButton = document.getElementById("filter-all-button");
+      filterAllButton.classList.remove("active");
+      filterButton.classList.toggle("active");
+    }
+    // only call the filterCards function if button is clicked to active
+    if (filterButton.classList.contains("active")) {
+      createMessage(buttonText); 
+    }
+  });
+}); 
+
+
+sortButtons.forEach((sortButton) => {
+  sortButton.addEventListener("click", () => {
+    // remove the class 'active' from all sort buttons
+    sortButtons.forEach((sortButton) => sortButton.classList.remove("active"));
+    // add the class 'active' to the clicked sort button
+    sortButton.classList.add("active");
+    
+    const buttonText = sortButton.innerText;
+    // only call the sortCards function if button is clicked to active
+    if (sortButton.classList.contains("active")) {
+      sortCards(buttonText);
+    }
+  });
+}); 
+
+
+
+  randomButton.addEventListener("click", () => {
+    randomButton.classList.toggle("active");
+
+    if(randomButton.classList.contains("active")) {
+      randomizeCard(); 
+    } else {
+      showRecipeCards(recipes);
+    }
+  });
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  showRecipeCards(recipes);
+});
