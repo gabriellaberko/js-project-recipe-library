@@ -165,33 +165,15 @@ const sortButtons = document.querySelectorAll(".sort-container .btn");
 const randomButton = document.getElementById("random-button");
 
 
-// const createMessage = buttonText => {
-//   const p = document.createElement("p");
-//   if (buttonText === "All") {
-//     addMessageToPlaceholder("You want it all?");
-//   } else if (buttonText === "Asian") {
-//     addMessageToPlaceholder("You choose Asian");
-//   } else if (buttonText === "Italian") {
-//     addMessageToPlaceholder("You choose Italian");
-//   } else if (buttonText === "Mediterranean") {
-//     addMessageToPlaceholder("You choose Mediterranean");
-//   } else if (buttonText === "Middle Eastern") {
-//     addMessageToPlaceholder("You choose Middle Eastern");
-//   } else if (buttonText === "Mexican") {
-//     addMessageToPlaceholder("You choose Mexican");
-//   } else if (buttonText === "Descending") {
-//     addMessageToPlaceholder("Looking for the most popular recepies?");
-//   } else if (buttonText === "Ascending") {
-//     addMessageToPlaceholder("The least popular recepies?");
-//   }
-// };
 
 
-const showRecipeCards = (recipeArray) => {
+const showRecipeCards = (recipeArray, reset = true) => {
   
   const cardContainer = document.getElementById("card-container");
-  //reset card container before filling it
-  cardContainer.innerHTML = "";
+  //if reset is true (as is the default parameter value for the function), reset card container before filling it
+  if (reset) {
+    cardContainer.innerHTML = "";
+  }
 
   recipeArray.forEach((recipe) => {
 
@@ -228,10 +210,37 @@ const showRecipeCards = (recipeArray) => {
   });
 };
 
+// TO DO: handle multiple acitive filters
 
-// sort cards on popularity score
+const filterCardsOnKitchen = buttonText => {
+  if (buttonText === "All") {
+    showRecipeCards(recipes);
+  } else {
+    const filteredCards = recipes.filter(recipe =>
+    recipe.cuisine === buttonText);
+    showRecipeCards(filteredCards);
+  }
+  
+  // if (buttonText === "Asian") {
+  //   showRecipeCards(fil)
+  // } else if (buttonText === "Italian") {
+    
+  // } else if (buttonText === "Mediterranean") {
+    
+  // } else if (buttonText === "Middle Eastern") {
+    
+  // } else if (buttonText === "Mexican") {
+    
+  // } else if (buttonText === "Descending") {
+    
+  // } else if (buttonText === "Ascending") {
+  
+  
+};
 
-const sortCards = buttonText => {
+
+
+const sortCardsOnPopularity = buttonText => {
   // create an array of the cards
   const cardArray = [...document.querySelectorAll(".card")];
   // get the popularity of each card
@@ -266,6 +275,15 @@ const randomizeCard = () => {
 }
 
 
+
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  showRecipeCards(recipes);
+});
+
+
 // (1) add an event listener for every button in the node list and add the class "active" only on the clicked button
 // (2) get the clicked button's text and use it as an argument when calling the createMessage function
 
@@ -285,7 +303,7 @@ filterButtons.forEach((filterButton) => {
     }
     // only call the filterCards function if button is clicked to active
     if (filterButton.classList.contains("active")) {
-      createMessage(buttonText); 
+      filterCardsOnKitchen(buttonText); 
     }
   });
 }); 
@@ -301,7 +319,7 @@ sortButtons.forEach((sortButton) => {
     const buttonText = sortButton.innerText;
     // only call the sortCards function if button is clicked to active
     if (sortButton.classList.contains("active")) {
-      sortCards(buttonText);
+      sortCardsOnPopularity(buttonText);
     }
   });
 }); 
@@ -318,7 +336,3 @@ sortButtons.forEach((sortButton) => {
     }
   });
 
-
-document.addEventListener("DOMContentLoaded", () => {
-  showRecipeCards(recipes);
-});
