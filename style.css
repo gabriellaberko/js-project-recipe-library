@@ -19,6 +19,11 @@ body {
   margin-bottom: 62px;
 }
 
+.sort-random-container {
+  display: flex;
+  gap: 46px;
+}
+
 .filter-container {
   margin-bottom: 24px;
 }
@@ -34,7 +39,8 @@ body {
   background-color: #CCFFE2;
 }
 
-.sort-container .btn {
+.sort-container .btn,
+.random-container .btn {
   background-color: #FFECEA;
 }
 
@@ -47,7 +53,8 @@ body {
   color: white;
 }
 
-.sort-container .active {
+.sort-container .active,
+.random-container .active {
   background-color: #FF6589;
   color: white;
 }
@@ -110,6 +117,12 @@ body {
   gap: 0;
 }
 
+.sort-random-container {
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
 .filter-container,
 .sort-container {
   display: flex;
@@ -139,7 +152,7 @@ body {
 }
 
 /* For wide screens */
-@media only screen and (min-width: 920px) {
+@media only screen and (min-width: 1150px) {
   
   .controls-container{
     flex-direction: row;
