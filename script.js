@@ -162,17 +162,16 @@ const recipes = [
 
 let activeFilters = [];
 
+// DOM elements
 const allButtons = document.querySelectorAll(".btn");
 const filterButtons = document.querySelectorAll(".filter-container .btn");
 const sortButtons = document.querySelectorAll(".sort-container .btn");
 const randomButton = document.getElementById("random-button");
-
-
+const cardContainer = document.getElementById("card-container");
 
 
 const showRecipeCards = (recipeArray) => {
   
-  const cardContainer = document.getElementById("card-container");
   //reset card container before filling it
   cardContainer.innerHTML = "";
 
@@ -187,6 +186,9 @@ const showRecipeCards = (recipeArray) => {
 
     // create elements in each card with content from each recipe
     card.innerHTML += `
+      <div class="heart-icon-container">
+      <i class="far fa-heart" style="font-size:24px;"></i>
+      </div>
       <img src=${recipe.image} alt=${recipe.title}>
       <h3>${recipe.title}</h3>
       <hr class="solid"
@@ -208,7 +210,7 @@ const showRecipeCards = (recipeArray) => {
       eachIngredient.textContent = ing;
       const ingredientList = card.querySelector(".ingredient-list");
       ingredientList.appendChild(eachIngredient);       
-  });
+    });
 
    // append the card to the card container
    cardContainer.appendChild(card);
@@ -284,7 +286,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-filterButtons.forEach((filterButton) => {
+filterButtons.forEach(filterButton => {
   filterButton.addEventListener("click", () => {
     const buttonText = filterButton.innerText;
     
@@ -310,11 +312,11 @@ filterButtons.forEach((filterButton) => {
 }); 
 
 
-sortButtons.forEach((sortButton) => {
+sortButtons.forEach(sortButton => {
   sortButton.addEventListener("click", () => {
     // remove the class 'active' from all sort buttons
     sortButtons.forEach((sortButton) => sortButton.classList.remove("active"));
-    // add the class 'active' to the clicked sort button
+
     sortButton.classList.add("active");
     
     const buttonText = sortButton.innerText;
@@ -326,15 +328,28 @@ sortButtons.forEach((sortButton) => {
 }); 
 
 
-  randomButton.addEventListener("click", () => {
-    // remove the class "active" from all buttons
-    allButtons.forEach((button) => button.classList.remove("active"));
-    randomButton.classList.toggle("active");
+randomButton.addEventListener("click", () => {
+  // remove the class "active" from all buttons
+  allButtons.forEach((button) => button.classList.remove("active"));
 
-    if(randomButton.classList.contains("active")) {
-      randomizeCard(); 
-    } else {
-      showRecipeCards(recipes);
-    }
-  });
+  randomButton.classList.toggle("active");
 
+  if(randomButton.classList.contains("active")) {
+    randomizeCard(); 
+  } else {
+    showRecipeCards(recipes);
+  }
+});
+
+
+// set click listener on cardContainder that always exist in the DOM, since the card and heart icons are added dynamically 
+cardContainer.addEventListener("click", (e) => {
+  // e.target is the DOM element that was clicked.
+  const heartIcon = e.target.closest(".far, .fas");
+  
+  // exit if the click is not the heart icon
+  if (!heartIcon) return;
+
+  heart.classList.toggle("far");
+  heart.classList.toggle("fas");
+});

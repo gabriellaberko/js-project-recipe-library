@@ -66,7 +66,7 @@ body {
 }
 
 .card {
- max-height: 650px;
+ height: 650px;
  border: 1px solid #E9E9E9;
  border-radius: 16px;
  padding: 12px;
@@ -75,6 +75,25 @@ body {
  font-size: 15px;
  overflow: hidden;
 }
+
+.heart-icon-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+}
+
+.far.fa-heart {
+  color: grey;
+}
+
+.fas.fa-heart {
+  color: #FF6589;
+}
+
+.far.fa-heart:hover {
+  color: #0018A4;
+}
+
 
 .recipe-information {
   font-size: 14px;
