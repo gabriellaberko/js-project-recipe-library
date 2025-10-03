@@ -1,3 +1,4 @@
+// global variables
 const recipes = [
   {
     id: 1,
@@ -161,6 +162,7 @@ const recipes = [
 ]
 
 let activeFilters = [];
+let favoriteRecipes = [];
 
 // DOM elements
 const allButtons = document.querySelectorAll(".btn");
@@ -183,6 +185,7 @@ const showRecipeCards = (recipeArray) => {
 
     const card = document.createElement("div");
     card.classList.add("card");
+    card.dataset.id = recipe.id;
 
     // create elements in each card with content from each recipe
     card.innerHTML += `
@@ -219,7 +222,6 @@ const showRecipeCards = (recipeArray) => {
 
 
 const filterCardsOnKitchen = activeFilters => {
-
   // if there is no active filters (all button is active), or in case activeFilters is undefined
   if (!activeFilters || activeFilters.length === 0)  {
     const filteredCards = [];
@@ -267,7 +269,7 @@ const randomizeCard = () => {
 }
 
 
-const handleActiveFilters = (buttonText, buttonIsActive) => {
+const updateActiveFilters = (buttonText, buttonIsActive) => {
   if(buttonText === "All") {
     activeFilters = [];
   } else if(buttonIsActive) {
@@ -278,6 +280,15 @@ const handleActiveFilters = (buttonText, buttonIsActive) => {
   return activeFilters;
 }
 
+const updateFavoriteRecipes = (recipeId, recipeIsLiked) => {
+  clickedRecipe = recipes.find(recipe => recipe.id === recipeId);
+  // add the property markedAsFavorite to the recipe in the recipes array with the value of true/false from recipeIsLiked
+  clickedRecipe.markedAsFavorite = recipeIsLiked;
+  
+  // add recipes that has the property markesAsFavorite to the array favoriteRecipes
+  favoriteRecipes = recipes.filter(recipe => 
+  recipe.markedAsFavorite);
+};
 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -306,7 +317,7 @@ filterButtons.forEach(filterButton => {
 
     const buttonIsActive = filterButton.classList.contains("active");
 
-    handleActiveFilters(buttonText, buttonIsActive);
+    updateActiveFilters(buttonText, buttonIsActive);
     filterCardsOnKitchen(activeFilters);
   });
 }); 
@@ -342,14 +353,22 @@ randomButton.addEventListener("click", () => {
 });
 
 
-// set click listener on cardContainder that always exist in the DOM, since the card and heart icons are added dynamically 
+// set click listener on cardContainer that always exist in the DOM, since the card and heart icons are added dynamically 
 cardContainer.addEventListener("click", (e) => {
   // e.target is the DOM element that was clicked.
   const heartIcon = e.target.closest(".far, .fas");
-  
+  const recipeId = parseInt(e.target.closest(".card").dataset.id);
+
   // exit if the click is not the heart icon
   if (!heartIcon) return;
 
-  heart.classList.toggle("far");
-  heart.classList.toggle("fas");
+  // toggle active state of the heart icon
+  heartIcon.classList.toggle("far");
+  heartIcon.classList.toggle("fas");
+
+  const recipeIsLiked = heartIcon.classList.contains("fas");
+  
+  updateFavoriteRecipes(recipeId, recipeIsLiked);
 });
+
+
