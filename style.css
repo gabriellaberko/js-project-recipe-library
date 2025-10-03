@@ -1,9 +1,33 @@
 body {
   box-sizing: border-box;
   font-family: "Futura", sans-serif;
-  margin: 70px 30px;
+  margin: 15px 30px 70px;
   background-color: #FAFBFF;
 }
+
+.favorite-recipes {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.favorite-button {
+  border-radius: 50px;
+  padding: 8px 16px;
+  font-size: 16px;
+  border: none;
+  color: #0018A4;
+
+}
+
+.favorite-button .fas.fa-heart {
+  color: #FF6589;;
+}
+
+.favorite-button:hover {
+  outline: 2px solid #0018A4;
+  /*rgb(74, 74, 74);*/
+}
+
 
 .title {
   color: #0018A4;
@@ -32,16 +56,17 @@ body {
   border-radius: 50px;
   padding: 8px 16px;
   border: none;
-  color: #0018A4;
 }
 
 .filter-container .btn {
   background-color: #CCFFE2;
+  color: #0018A4;
 }
 
 .sort-container .btn,
 .random-container .btn {
   background-color: #FFECEA;
+  color: #0018A4;
 }
 
 .btn:hover {
@@ -90,8 +115,8 @@ body {
   color: #FF6589;
 }
 
-.far.fa-heart:hover {
-  color: #0018A4;
+.card-container .far.fa-heart:hover {
+  color: #FF6589;;
 }
 
 

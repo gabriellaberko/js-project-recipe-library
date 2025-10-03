@@ -285,7 +285,7 @@ const updateFavoriteRecipes = (recipeId, recipeIsLiked) => {
   // add the property markedAsFavorite to the recipe in the recipes array with the value of true/false from recipeIsLiked
   clickedRecipe.markedAsFavorite = recipeIsLiked;
   
-  // add recipes that has the property markesAsFavorite to the array favoriteRecipes
+  // include the recipes where markedAsFavorite is truthy 
   favoriteRecipes = recipes.filter(recipe => 
   recipe.markedAsFavorite);
 };
