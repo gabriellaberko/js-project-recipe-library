@@ -11,21 +11,12 @@ body {
 }
 
 .favorite-button {
-  border-radius: 50px;
   padding: 8px 16px;
   font-size: 16px;
-  border: none;
-  color: #0018A4;
-
 }
 
 .favorite-button .fas.fa-heart {
   color: #FF6589;;
-}
-
-.favorite-button:hover {
-  outline: 2px solid #0018A4;
-  /*rgb(74, 74, 74);*/
 }
 
 
@@ -34,7 +25,7 @@ body {
   font-weight: 700;
   font-style: bold;
   font-size: 64px;
-  margin-bottom: 52px;
+  margin-bottom: 52px 0;
 }
 
 .controls-container {

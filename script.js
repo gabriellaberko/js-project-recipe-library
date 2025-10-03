@@ -169,7 +169,9 @@ const allButtons = document.querySelectorAll(".btn");
 const filterButtons = document.querySelectorAll(".filter-container .btn");
 const sortButtons = document.querySelectorAll(".sort-container .btn");
 const randomButton = document.getElementById("random-button");
+const favoriteButton = document.getElementById("favorite-button");
 const cardContainer = document.getElementById("card-container");
+const favoriteRecipeHearts = document.querySelectorAll(".card-container .fa-heart");
 
 
 const showRecipeCards = (recipeArray) => {
@@ -187,10 +189,12 @@ const showRecipeCards = (recipeArray) => {
     card.classList.add("card");
     card.dataset.id = recipe.id;
 
+    const heartIconStatus = recipe.markedAsFavorite ? "fas" : "far";
+
     // create elements in each card with content from each recipe
     card.innerHTML += `
       <div class="heart-icon-container">
-      <i class="far fa-heart" style="font-size:24px;"></i>
+      <i class="${heartIconStatus} fa-heart" style="font-size:24px;"></i>
       </div>
       <img src=${recipe.image} alt=${recipe.title}>
       <h3>${recipe.title}</h3>
@@ -353,6 +357,7 @@ randomButton.addEventListener("click", () => {
 });
 
 
+
 // set click listener on cardContainer that always exist in the DOM, since the card and heart icons are added dynamically 
 cardContainer.addEventListener("click", (e) => {
   // e.target is the DOM element that was clicked.
@@ -372,3 +377,9 @@ cardContainer.addEventListener("click", (e) => {
 });
 
 
+
+
+favoriteButton.addEventListener("click", () => {
+  showRecipeCards(favoriteRecipes);
+  allButtons.forEach((button) => button.classList.remove("active"));
+});
