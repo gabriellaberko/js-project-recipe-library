@@ -165,30 +165,6 @@ const url = `https://api.spoonacular.com/recipes/random?number=3&apiKey=${apiKey
 let activeFilters = [];
 let favoriteRecipes = [];
 
-
-// fetch data from API
-const fetchData = () => {
-  fetch(url)
-
-    .then(response => {
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`)
-      }
-      return response.json()
-    })
-
-    .then(data => {
-      console.log(data)
-      showRecipeCards(data.recipes)
-      //data.recipes.forEach(recipe=>console.log(recipe.title))
-
-    })
-
-    .catch(error => {
-      console.error('Fetch error:', error)
-    })
-};
-
 // DOM elements
 const allButtons = document.querySelectorAll(".btn");
 const filterButtons = document.querySelectorAll(".filter-container .btn");
@@ -197,6 +173,50 @@ const randomButton = document.getElementById("random-button");
 const favoriteButton = document.getElementById("favorite-button");
 const cardContainer = document.getElementById("card-container");
 const favoriteRecipeHearts = document.querySelectorAll(".card-container .fa-heart");
+
+
+// fetch data from API
+const fetchData = () => {
+  fetch(url)
+
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      return response.json();
+    })
+
+    .then(data => {
+      //console.log(data)
+      const fetchedRecipes = data.recipes;
+
+      // if we have a successful fetch we save it to local storage and call showRecipeCards with the data from the fetch
+      if(fetchedRecipes && fetchedRecipes.length > 0 ) {
+        localStorage.setItem("recipes", JSON.stringify(fetchedRecipes));
+        showRecipeCards(fetchedRecipes);
+      // if the fetch has no data (empty array)
+      } else {
+        // use data from local storage (if it has data)
+        const storedRecipes = JSON.parse(localStorage.getItem("recipes"));  
+        if (storedRecipes && storedRecipes.length > 0) {
+          showRecipeCards(storedRecipes);
+        } else {
+          cardContainer.innerHTML = `<p class="filter-error-message">No recipes found locally or from API.</p>`;
+        }
+      }
+    })
+
+    .catch(error => {
+      console.error('Fetch error:', error);
+      const storedRecipes = JSON.parse(localStorage.getItem("recipes"));  
+
+      if (storedRecipes && storedRecipes.length > 0) {
+        showRecipeCards(storedRecipes);
+      } else {
+        cardContainer.innerHTML = `<p class="filter-error-message">No recipes found locally or from API.</p>`;
+      }
+    })
+};
 
 
 const showRecipeCards = (recipeArray) => {
@@ -226,8 +246,8 @@ const showRecipeCards = (recipeArray) => {
       <hr class="solid">
       <div class="recipe-information">
         <p><b>Cuisine:</b> ${
-          recipe.cuisine && recipe.cuisine.length > 0
-          ? recipe.cuisine.join(", ")
+          recipe.cuisines && recipe.cuisines.length > 0
+          ? recipe.cuisines.join(", ")
           : "Not specified"
         }</p>
         <p><b>Time:</b> ${recipe.readyInMinutes} min</p>
@@ -380,7 +400,6 @@ const updateFavoriteRecipes = (recipeId, recipeIsLiked) => {
 
 document.addEventListener("DOMContentLoaded", () => {
   fetchData();
-  // showRecipeCards(recipes);
 });
 
 
