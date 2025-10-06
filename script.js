@@ -194,9 +194,8 @@ const fetchData = () => {
       if(fetchedRecipes && fetchedRecipes.length > 0 ) {
         localStorage.setItem("recipes", JSON.stringify(fetchedRecipes));
         showRecipeCards(fetchedRecipes);
-      // if the fetch has no data (empty array)
+      // if the fetch has no data (empty array), use data from local storage
       } else {
-        // use data from local storage (if it has data)
         const storedRecipes = JSON.parse(localStorage.getItem("recipes"));  
         if (storedRecipes && storedRecipes.length > 0) {
           showRecipeCards(storedRecipes);
