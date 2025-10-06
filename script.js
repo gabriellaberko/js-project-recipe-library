@@ -1,169 +1,170 @@
 // global variables
-const recipes = [
-  {
-    id: 1,
-    title: "Vegan Lentil Soup",
-    image: "./baked-chicken.jpg",
-    readyInMinutes: 30,
-    servings: 4,
-    sourceUrl: "https://example.com/vegan-lentil-soup",
-    diets: ["vegan"],
-    cuisine: "Mediterranean",
-    ingredients: [
-      "red lentils",
-      "carrots",
-      "onion",
-      "garlic",
-      "tomato paste",
-      "cumin",
-      "paprika",
-      "vegetable broth",
-      "olive oil",
-      "salt"
-    ],
-    pricePerServing: 2.5,
-    popularity: 85
-  },
-  {
-    id: 2,
-    title: "Vegetarian Pesto Pasta",
-    image: "./baked-chicken.jpg",
-    readyInMinutes: 25,
-    servings: 2,
-    sourceUrl: "https://example.com/vegetarian-pesto-pasta",
-    diets: ["vegetarian"],
-    cuisine: "Italian",
-    ingredients: [
-      "pasta",
-      "basil",
-      "parmesan cheese",
-      "garlic",
-      "pine nuts",
-      "olive oil",
-      "salt",
-      "black pepper"
-    ],
-    pricePerServing: 3.0,
-    popularity: 92
-  },
-  {
-    id: 3,
-    title: "Gluten-Free Chicken Stir-Fry",
-    image: "./baked-chicken.jpg",
-    readyInMinutes: 20,
-    servings: 3,
-    sourceUrl: "https://example.com/gluten-free-chicken-stir-fry",
-    diets: ["gluten-free"],
-    cuisine: "Asian",
-    ingredients: [
-      "chicken breast",
-      "broccoli",
-      "bell pepper",
-      "carrot",
-      "soy sauce (gluten-free)",
-      "ginger",
-      "garlic",
-      "sesame oil",
-      "cornstarch",
-      "green onion",
-      "sesame seeds",
-      "rice"
-    ],
-    pricePerServing: 4.0,
-    popularity: 78
-  },
-  {
-    id: 4,
-    title: "Dairy-Free Tacos",
-    image: "./baked-chicken.jpg",
-    readyInMinutes: 15,
-    servings: 2,
-    sourceUrl: "https://example.com/dairy-free-tacos",
-    diets: ["dairy-free"],
-    cuisine: "Mexican",
-    ingredients: [
-      "corn tortillas",
-      "ground beef",
-      "taco seasoning",
-      "lettuce",
-      "tomato",
-      "avocado"
-    ],
-    pricePerServing: 2.8,
-    popularity: 88
-  },
-  {
-    id: 5,
-    title: "Middle Eastern Hummus",
-    image: "./baked-chicken.jpg",
-    readyInMinutes: 10,
-    servings: 4,
-    sourceUrl: "https://example.com/middle-eastern-hummus",
-    diets: ["vegan", "gluten-free"],
-    cuisine: "Middle Eastern",
-    ingredients: [
-      "chickpeas",
-      "tahini",
-      "garlic",
-      "lemon juice",
-      "olive oil"
-    ],
-    pricePerServing: 1.5,
-    popularity: 95
-  },
-  {
-    id: 6,
-    title: "Quick Avocado Toast",
-    image: "./baked-chicken.jpg",
-    readyInMinutes: 5,
-    servings: 1,
-    sourceUrl: "https://example.com/quick-avocado-toast",
-    diets: ["vegan"],
-    cuisine: "Mediterranean",
-    ingredients: [
-      "bread",
-      "avocado",
-      "lemon juice",
-      "salt"
-    ],
-    pricePerServing: 2.0,
-    popularity: 90
-  },
-  {
-    id: 7,
-    title: "Beef Stew",
-    image: "./baked-chicken.jpg",
-    readyInMinutes: 90,
-    servings: 5,
-    sourceUrl: "https://example.com/beef-stew",
-    diets: [],
-    cuisine: "European",
-    ingredients: [
-      "beef chunks",
-      "potatoes",
-      "carrots",
-      "onion",
-      "garlic",
-      "tomato paste",
-      "beef broth",
-      "red wine",
-      "bay leaves",
-      "thyme",
-      "salt",
-      "black pepper",
-      "butter",
-      "flour",
-      "celery",
-      "mushrooms"
-    ],
-    pricePerServing: 5.5,
-    popularity: 80
-  }
-]
+// const recipes = [
+//   {
+//     id: 1,
+//     title: "Vegan Lentil Soup",
+//     image: "./baked-chicken.jpg",
+//     readyInMinutes: 30,
+//     servings: 4,
+//     sourceUrl: "https://example.com/vegan-lentil-soup",
+//     diets: ["vegan"],
+//     cuisine: "Mediterranean",
+//     ingredients: [
+//       "red lentils",
+//       "carrots",
+//       "onion",
+//       "garlic",
+//       "tomato paste",
+//       "cumin",
+//       "paprika",
+//       "vegetable broth",
+//       "olive oil",
+//       "salt"
+//     ],
+//     pricePerServing: 2.5,
+//     popularity: 85
+//   },
+//   {
+//     id: 2,
+//     title: "Vegetarian Pesto Pasta",
+//     image: "./baked-chicken.jpg",
+//     readyInMinutes: 25,
+//     servings: 2,
+//     sourceUrl: "https://example.com/vegetarian-pesto-pasta",
+//     diets: ["vegetarian"],
+//     cuisine: "Italian",
+//     ingredients: [
+//       "pasta",
+//       "basil",
+//       "parmesan cheese",
+//       "garlic",
+//       "pine nuts",
+//       "olive oil",
+//       "salt",
+//       "black pepper"
+//     ],
+//     pricePerServing: 3.0,
+//     popularity: 92
+//   },
+//   {
+//     id: 3,
+//     title: "Gluten-Free Chicken Stir-Fry",
+//     image: "./baked-chicken.jpg",
+//     readyInMinutes: 20,
+//     servings: 3,
+//     sourceUrl: "https://example.com/gluten-free-chicken-stir-fry",
+//     diets: ["gluten-free"],
+//     cuisine: "Asian",
+//     ingredients: [
+//       "chicken breast",
+//       "broccoli",
+//       "bell pepper",
+//       "carrot",
+//       "soy sauce (gluten-free)",
+//       "ginger",
+//       "garlic",
+//       "sesame oil",
+//       "cornstarch",
+//       "green onion",
+//       "sesame seeds",
+//       "rice"
+//     ],
+//     pricePerServing: 4.0,
+//     popularity: 78
+//   },
+//   {
+//     id: 4,
+//     title: "Dairy-Free Tacos",
+//     image: "./baked-chicken.jpg",
+//     readyInMinutes: 15,
+//     servings: 2,
+//     sourceUrl: "https://example.com/dairy-free-tacos",
+//     diets: ["dairy-free"],
+//     cuisine: "Mexican",
+//     ingredients: [
+//       "corn tortillas",
+//       "ground beef",
+//       "taco seasoning",
+//       "lettuce",
+//       "tomato",
+//       "avocado"
+//     ],
+//     pricePerServing: 2.8,
+//     popularity: 88
+//   },
+//   {
+//     id: 5,
+//     title: "Middle Eastern Hummus",
+//     image: "./baked-chicken.jpg",
+//     readyInMinutes: 10,
+//     servings: 4,
+//     sourceUrl: "https://example.com/middle-eastern-hummus",
+//     diets: ["vegan", "gluten-free"],
+//     cuisine: "Middle Eastern",
+//     ingredients: [
+//       "chickpeas",
+//       "tahini",
+//       "garlic",
+//       "lemon juice",
+//       "olive oil"
+//     ],
+//     pricePerServing: 1.5,
+//     popularity: 95
+//   },
+//   {
+//     id: 6,
+//     title: "Quick Avocado Toast",
+//     image: "./baked-chicken.jpg",
+//     readyInMinutes: 5,
+//     servings: 1,
+//     sourceUrl: "https://example.com/quick-avocado-toast",
+//     diets: ["vegan"],
+//     cuisine: "Mediterranean",
+//     ingredients: [
+//       "bread",
+//       "avocado",
+//       "lemon juice",
+//       "salt"
+//     ],
+//     pricePerServing: 2.0,
+//     popularity: 90
+//   },
+//   {
+//     id: 7,
+//     title: "Beef Stew",
+//     image: "./baked-chicken.jpg",
+//     readyInMinutes: 90,
+//     servings: 5,
+//     sourceUrl: "https://example.com/beef-stew",
+//     diets: [],
+//     cuisine: "European",
+//     ingredients: [
+//       "beef chunks",
+//       "potatoes",
+//       "carrots",
+//       "onion",
+//       "garlic",
+//       "tomato paste",
+//       "beef broth",
+//       "red wine",
+//       "bay leaves",
+//       "thyme",
+//       "salt",
+//       "black pepper",
+//       "butter",
+//       "flour",
+//       "celery",
+//       "mushrooms"
+//     ],
+//     pricePerServing: 5.5,
+//     popularity: 80
+//   }
+// ]
 const apiKey = "cf8d763903c74744a4d13c68cc9aa6c8";
 const url = `https://api.spoonacular.com/recipes/random?number=3&apiKey=${apiKey}`;
 let activeFilters = [];
 let favoriteRecipes = [];
+let allRecipes = [];
 
 // DOM elements
 const allButtons = document.querySelectorAll(".btn");
@@ -177,6 +178,9 @@ const favoriteRecipeHearts = document.querySelectorAll(".card-container .fa-hear
 
 // fetch data from API
 const fetchData = () => {
+  // create a variable with data from local storage
+  const storedRecipes = JSON.parse(localStorage.getItem("recipes"));  
+
   fetch(url)
 
     .then(response => {
@@ -187,30 +191,32 @@ const fetchData = () => {
     })
 
     .then(data => {
-      //console.log(data)
+      
       const fetchedRecipes = data.recipes;
 
-      // if we have a successful fetch we save it to local storage and call showRecipeCards with the data from the fetch
+      // if fetch is successful, save it to local storage and update allRecipes
       if(fetchedRecipes && fetchedRecipes.length > 0 ) {
         localStorage.setItem("recipes", JSON.stringify(fetchedRecipes));
-        showRecipeCards(fetchedRecipes);
-      // if the fetch has no data (empty array), use data from local storage
+        allRecipes = fetchedRecipes;
+      // if the fetch has no data (empty array), update allRecipes with data from local storage
       } else {
-        const storedRecipes = JSON.parse(localStorage.getItem("recipes"));  
-        if (storedRecipes && storedRecipes.length > 0) {
-          showRecipeCards(storedRecipes);
-        } else {
-          cardContainer.innerHTML = `<p class="filter-error-message">No recipes found locally or from API.</p>`;
-        }
+        allRecipes = storedRecipes;
       }
-    })
 
+      if (allRecipes.length > 0) {
+        showRecipeCards(allRecipes);
+      } else {
+        cardContainer.innerHTML = `<p class="filter-error-message">No recipes found locally or from API.</p>`;
+      }
+    
+    })
+    // if fetch fails
     .catch(error => {
       console.error('Fetch error:', error);
-      const storedRecipes = JSON.parse(localStorage.getItem("recipes"));  
-
-      if (storedRecipes && storedRecipes.length > 0) {
-        showRecipeCards(storedRecipes);
+      // update allRecipes with data from local storage
+      allRecipes = storedRecipes;
+      if (allRecipes.length > 0) {
+        showRecipeCards(allRecipes);
       } else {
         cardContainer.innerHTML = `<p class="filter-error-message">No recipes found locally or from API.</p>`;
       }
