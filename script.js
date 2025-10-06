@@ -179,7 +179,7 @@ const favoriteRecipeHearts = document.querySelectorAll(".card-container .fa-hear
 // fetch data from API
 const fetchData = () => {
   // create a variable with data from local storage
-  const storedRecipes = JSON.parse(localStorage.getItem("recipes"));  
+  const storedRecipes = JSON.parse(localStorage.getItem("recipes")) || [];  
 
   fetch(url)
 
@@ -191,7 +191,7 @@ const fetchData = () => {
     })
 
     .then(data => {
-      
+
       const fetchedRecipes = data.recipes;
 
       // if fetch is successful, save it to local storage and update allRecipes
@@ -337,10 +337,12 @@ const filterCardsOnKitchen = activeFilters => {
   // if there is no active filters (all button is active), or in case activeFilters is undefined
   if (!activeFilters || activeFilters.length === 0)  {
     const filteredCards = [];
-    showRecipeCards(recipes);
+    showRecipeCards(allRecipes);
   } else {
-    filteredCards = recipes.filter(recipe => 
-      activeFilters.includes(recipe.cuisine)
+    filteredCards = allRecipes.filter(recipe => 
+      recipe.cuisnes && recipe.cuisines.some(cuisine =>
+        activeFilters.includes(cuisine);
+      )
     );
     showRecipeCards(filteredCards);
   }
