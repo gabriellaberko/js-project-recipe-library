@@ -161,7 +161,7 @@ const recipes = [
   }
 ]
 const apiKey = "cf8d763903c74744a4d13c68cc9aa6c8";
-const url = `https://api.spoonacular.com/recipes/random?number=1&apiKey=${apiKey}`;
+const url = `https://api.spoonacular.com/recipes/random?number=3&apiKey=${apiKey}`;
 let activeFilters = [];
 let favoriteRecipes = [];
 
@@ -179,6 +179,7 @@ const fetchData = () => {
 
     .then(data => {
       console.log(data)
+      showRecipeCards(data.recipes)
       //data.recipes.forEach(recipe=>console.log(recipe.title))
 
     })
@@ -222,23 +223,31 @@ const showRecipeCards = (recipeArray) => {
       </div>
       <img src=${recipe.image} alt=${recipe.title}>
       <h3>${recipe.title}</h3>
-      <hr class="solid"
+      <hr class="solid">
       <div class="recipe-information">
-        <p><b>Cuisine:</b> ${recipe.cuisine}</p>
+        <p><b>Cuisine:</b> ${
+          recipe.cuisine && recipe.cuisine.length > 0
+          ? recipe.cuisine.join(", ")
+          : "Not specified"
+        }</p>
         <p><b>Time:</b> ${recipe.readyInMinutes} min</p>
-        <p class="popularity"><b>Popularity:</b> ${recipe.popularity}</p>
+      </div>
+      <hr class="solid">
+      <div class="recipe-instructions">
+        <h4>Instructions:</h4>
+        <p>${recipe.instructions}</p>
       </div>
       <hr class="solid">
       <div class="ingredients">
-        <h4>Ingredients:</h4>
+        <h5>Ingredients:</h5>
         <ul class="ingredient-list"></ul>
       </div>
     `
     
     // create a <li> for every ingredient in each recipe and append it to the ingredient list in the card
-    recipe.ingredients.forEach((ing) => {
+    recipe.extendedIngredients.forEach((ing) => {
       const eachIngredient = document.createElement("li");
-      eachIngredient.textContent = ing;
+      eachIngredient.textContent = ing.original;
       const ingredientList = card.querySelector(".ingredient-list");
       ingredientList.appendChild(eachIngredient);       
     });
@@ -247,6 +256,56 @@ const showRecipeCards = (recipeArray) => {
    cardContainer.appendChild(card);
   });
 };
+
+// const showRecipeCards = (recipeArray) => {
+  
+//   //reset card container before filling it
+//   cardContainer.innerHTML = "";
+
+//   if(!recipeArray || recipeArray.length === 0) {
+//     cardContainer.innerHTML = `<p class="filter-error-message">Oh no!🥲 Unfortunately there are no recipes matching your current filter. Try another one!</p>`;
+//   }
+
+//   recipeArray.forEach((recipe) => {
+
+//     const card = document.createElement("div");
+//     card.classList.add("card");
+//     card.dataset.id = recipe.id;
+
+//     const heartIconStatus = recipe.markedAsFavorite ? "fas" : "far";
+
+//     // create elements in each card with content from each recipe
+//     card.innerHTML += `
+//       <div class="heart-icon-container">
+//       <i class="${heartIconStatus} fa-heart" style="font-size:24px;"></i>
+//       </div>
+//       <img src=${recipe.image} alt=${recipe.title}>
+//       <h3>${recipe.title}</h3>
+//       <hr class="solid"
+//       <div class="recipe-information">
+//         <p><b>Cuisine:</b> ${recipe.cuisine}</p>
+//         <p><b>Time:</b> ${recipe.readyInMinutes} min</p>
+//         <p class="popularity"><b>Popularity:</b> ${recipe.popularity}</p>
+//       </div>
+//       <hr class="solid">
+//       <div class="ingredients">
+//         <h4>Ingredients:</h4>
+//         <ul class="ingredient-list"></ul>
+//       </div>
+//     `
+    
+//     // create a <li> for every ingredient in each recipe and append it to the ingredient list in the card
+//     recipe.ingredients.forEach((ing) => {
+//       const eachIngredient = document.createElement("li");
+//       eachIngredient.textContent = ing;
+//       const ingredientList = card.querySelector(".ingredient-list");
+//       ingredientList.appendChild(eachIngredient);       
+//     });
+
+//    // append the card to the card container
+//    cardContainer.appendChild(card);
+//   });
+// };
 
 
 const filterCardsOnKitchen = activeFilters => {
@@ -321,7 +380,7 @@ const updateFavoriteRecipes = (recipeId, recipeIsLiked) => {
 
 document.addEventListener("DOMContentLoaded", () => {
   fetchData();
-  showRecipeCards(recipes);
+  // showRecipeCards(recipes);
 });
 
 
