@@ -160,9 +160,33 @@ const recipes = [
     popularity: 80
   }
 ]
-
+const apiKey = "cf8d763903c74744a4d13c68cc9aa6c8";
+const url = `https://api.spoonacular.com/recipes/random?number=1&apiKey=${apiKey}`;
 let activeFilters = [];
 let favoriteRecipes = [];
+
+
+// fetch data from API
+const fetchData = () => {
+  fetch(url)
+
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`)
+      }
+      return response.json()
+    })
+
+    .then(data => {
+      console.log(data)
+      //data.recipes.forEach(recipe=>console.log(recipe.title))
+
+    })
+
+    .catch(error => {
+      console.error('Fetch error:', error)
+    })
+};
 
 // DOM elements
 const allButtons = document.querySelectorAll(".btn");
@@ -296,6 +320,7 @@ const updateFavoriteRecipes = (recipeId, recipeIsLiked) => {
 
 
 document.addEventListener("DOMContentLoaded", () => {
+  fetchData();
   showRecipeCards(recipes);
 });
 

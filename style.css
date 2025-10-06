@@ -139,6 +139,8 @@ body {
   background-color: #ffffff;
   box-shadow: 0 0 5px rgb(193, 193, 193);
   padding: 20px;
+  justify-content: center;
+  align-items: center;
 }
 
 
