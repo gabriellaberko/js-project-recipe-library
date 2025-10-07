@@ -14,6 +14,7 @@ const favoriteButton = document.getElementById("favorite-button");
 const searchButton = document.getElementById("search-button");
 const cardContainer = document.getElementById("card-container");
 const favoriteRecipeHearts = document.querySelectorAll(".card-container .fa-heart");
+const cardButtons = document.querySelectorAll(".card-button");
 
 
 // fetch data from API
@@ -84,36 +85,39 @@ const showRecipeCards = (recipeArray) => {
     // create elements in each card with content from each recipe
     card.innerHTML += `
       <div class="recipe-content">
-      <div class="heart-icon-container">
-      <i class="${heartIconStatus} fa-heart" style="font-size:24px;"></i>
+        <div class="heart-icon-container">
+        <i class="${heartIconStatus} fa-heart" style="font-size:24px;"></i>
+        </div>
+        <img src=${recipe.image} alt=${recipe.title}>
+        <h3>${recipe.title}</h3>
+        <hr class="solid">
+        <div class="recipe-information">
+          <p><b>Cuisine:</b> ${
+            recipe.cuisines && recipe.cuisines.length > 0
+            ? recipe.cuisines.join(", ")
+            : "Not specified"
+          }</p>
+          <p class="time"><b>Time:</b> ${recipe.readyInMinutes} min</p>
+          <p><b>Servings:</b> ${recipe.servings}</p>
+        </div>
+        <hr class="solid">
+        <div class="recipe-summary">
+          <p>${recipe.summary.split('. ').slice(0, 2).join('. ') + '.'}</p>
+        </div>
+        <div class="recipe-instruction hidden">
+          <h4>Instructions:</h4>
+          <ol>
+          ${recipe.analyzedInstructions[0].steps
+            .map(step => `<li>${step.step}</li>`)
+            .join('')}
+          </ol>
+        </div>
+        <div class="ingredients hidden">
+          <h4>Ingredients:</h4>
+          <ul class="ingredient-list"></ul>
+        </div>
       </div>
-      <img src=${recipe.image} alt=${recipe.title}>
-      <h3>${recipe.title}</h3>
-      <hr class="solid">
-      <div class="recipe-information">
-        <p><b>Cuisine:</b> ${
-          recipe.cuisines && recipe.cuisines.length > 0
-          ? recipe.cuisines.join(", ")
-          : "Not specified"
-        }</p>
-        <p class="time"><b>Time:</b> ${recipe.readyInMinutes} min</p>
-      </div>
-      <hr class="solid">
-      <div class="recipe-instructions">
-        <h4>Instructions:</h4>
-        <ol>
-        ${recipe.analyzedInstructions[0].steps
-          .map(step => `<li>${step.step}</li>`)
-          .join('')}
-        </ol>
-      </div>
-      <hr class="solid">
-      <div class="ingredients">
-        <h5>Ingredients:</h5>
-        <ul class="ingredient-list"></ul>
-      </div>
-      </div>
-      <button>Read more</button>
+      <button class="card-button">Read more</button>
     `
     
     // create a <li> for every ingredient in each recipe and append it to the ingredient list in the card
