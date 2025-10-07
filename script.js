@@ -255,7 +255,7 @@ const showRecipeCards = (recipeArray) => {
           ? recipe.cuisines.join(", ")
           : "Not specified"
         }</p>
-        <p><b>Time:</b> ${recipe.readyInMinutes} min</p>
+        <p class="time"><b>Time:</b> ${recipe.readyInMinutes} min</p>
       </div>
       <hr class="solid">
       <div class="recipe-instructions">
@@ -348,12 +348,12 @@ const filterCardsOnKitchen = activeFilters => {
 };
 
 
-const sortCardsOnPopularity = buttonText => {
+const sortCardsOnTime = buttonText => {
   // create an array of the cards
   const cardArray = [...document.querySelectorAll(".card")];
   // get the popularity of each card
-  const getPopularity = (card) => {
-    const text = card.querySelector(".popularity").textContent;
+  const getTime = (card) => {
+    const text = card.querySelector(".time").textContent;
      // extract and return the number from it
     const number = text.match(/\d+/);
     return number ? parseInt(number[0], 10) : 0;
@@ -361,9 +361,9 @@ const sortCardsOnPopularity = buttonText => {
 
     cardArray.sort((a, b) => {
     if (buttonText === "Descending") {
-      return getPopularity(b) - getPopularity(a);
+      return getTime(b) - getTime(a);
     } else if (buttonText === "Ascending") {
-      return getPopularity(a) - getPopularity(b);
+      return getTime(a) - getTime(b);
     }
     });
 
@@ -446,7 +446,7 @@ sortButtons.forEach(sortButton => {
     const buttonText = sortButton.innerText;
     // only call the sortCards function if button is clicked to active
     if (sortButton.classList.contains("active")) {
-      sortCardsOnPopularity(buttonText);
+      sortCardsOnTime(buttonText);
     }
   });
 }); 
