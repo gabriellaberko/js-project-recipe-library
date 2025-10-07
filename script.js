@@ -99,7 +99,11 @@ const showRecipeCards = (recipeArray) => {
       <hr class="solid">
       <div class="recipe-instructions">
         <h4>Instructions:</h4>
-        <p>${recipe.instructions}</p>
+        <ol>
+        ${recipe.analyzedInstructions[0].steps
+          .map(step => `<li>${step.step}</li>`)
+          .join('')}
+        </ol>
       </div>
       <hr class="solid">
       <div class="ingredients">
@@ -179,7 +183,7 @@ const filterCardsOnKitchen = activeFilters => {
     showRecipeCards(allRecipes);
   } else {
     filteredCards = allRecipes.filter(recipe => 
-      recipe.cuisnes && recipe.cuisines.some(cuisine =>
+      recipe.cuisines && recipe.cuisines.some(cuisine =>
         activeFilters.includes(cuisine)
       ));
     showRecipeCards(filteredCards);
