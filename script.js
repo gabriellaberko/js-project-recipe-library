@@ -14,7 +14,9 @@ const favoriteButton = document.getElementById("favorite-button");
 const searchButton = document.getElementById("search-button");
 const cardContainer = document.getElementById("card-container");
 const favoriteRecipeHearts = document.querySelectorAll(".card-container .fa-heart");
-const cardButtons = document.querySelectorAll(".card-button");
+const modalOverlay = document.getElementById("modal-overlay");
+const modalContent = document.getElementById("modal-content");
+const modalCrossIcon = document.getElementById("cross-icon");
 
 
 // fetch data from API
@@ -132,6 +134,12 @@ const showRecipeCards = (recipeArray) => {
    cardContainer.appendChild(card);
   });
 };
+
+
+function openCloseModal() {
+  modalOverlay.classList.toggle("hidden");
+};
+
 
 
 const filterCardsOnKitchen = activeFilters => {
@@ -299,13 +307,29 @@ cardContainer.addEventListener("click", (e) => {
 
 
 
+// set click listener on cardContainer that always exist in the DOM, since the card and its buttons are added dynamically 
+cardContainer.addEventListener("click", (e) => {
+  // e.target is the DOM element that was clicked.
+  const cardButton = e.target.closest(".card-button");
+
+  // exit if the click is not the card button
+  if (!cardButton) return;
+
+  openCloseModal();
+});
+
+
+  
+modalCrossIcon.addEventListener("click", openCloseModal);
+
+
 favoriteButton.addEventListener("click", () => {
   showRecipeCards(favoriteRecipes);
   allButtons.forEach((button) => button.classList.remove("active"));
 });
 
 
-searchButton.addEventListener("input",(e) =>{
+searchButton.addEventListener("input", (e) =>{
   const liveInputText = e.target.value;
   filterCardsOnSearch(liveInputText);
 });
