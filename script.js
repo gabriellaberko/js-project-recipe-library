@@ -341,9 +341,8 @@ const filterCardsOnKitchen = activeFilters => {
   } else {
     filteredCards = allRecipes.filter(recipe => 
       recipe.cuisnes && recipe.cuisines.some(cuisine =>
-        activeFilters.includes(cuisine);
-      )
-    );
+        activeFilters.includes(cuisine)
+      ));
     showRecipeCards(filteredCards);
   }
 };
@@ -377,8 +376,8 @@ const sortCardsOnPopularity = buttonText => {
 
 
 const randomizeCard = () => {
-  const randomIndex = Math.floor(Math.random() * recipes.length);
-  const randomRecipe = recipes[randomIndex];
+  const randomIndex = Math.floor(Math.random() * allRecipes.length);
+  const randomRecipe = allRecipes[randomIndex];
   showRecipeCards([randomRecipe]);
 }
 
@@ -395,12 +394,12 @@ const updateActiveFilters = (buttonText, buttonIsActive) => {
 }
 
 const updateFavoriteRecipes = (recipeId, recipeIsLiked) => {
-  clickedRecipe = recipes.find(recipe => recipe.id === recipeId);
+  clickedRecipe = allRecipes.find(recipe => recipe.id === recipeId);
   // add the property markedAsFavorite to the recipe in the recipes array with the value of true/false from recipeIsLiked
   clickedRecipe.markedAsFavorite = recipeIsLiked;
   
   // include the recipes where markedAsFavorite is truthy 
-  favoriteRecipes = recipes.filter(recipe => 
+  favoriteRecipes = allRecipes.filter(recipe => 
   recipe.markedAsFavorite);
 };
 
@@ -462,7 +461,7 @@ randomButton.addEventListener("click", () => {
   if(randomButton.classList.contains("active")) {
     randomizeCard(); 
   } else {
-    showRecipeCards(recipes);
+    showRecipeCards(allRecipes);
   }
 });
 
