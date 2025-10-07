@@ -83,6 +83,7 @@ const showRecipeCards = (recipeArray) => {
 
     // create elements in each card with content from each recipe
     card.innerHTML += `
+      <div class="recipe-content">
       <div class="heart-icon-container">
       <i class="${heartIconStatus} fa-heart" style="font-size:24px;"></i>
       </div>
@@ -111,6 +112,8 @@ const showRecipeCards = (recipeArray) => {
         <h5>Ingredients:</h5>
         <ul class="ingredient-list"></ul>
       </div>
+      </div>
+      <button>Read more</button>
     `
     
     // create a <li> for every ingredient in each recipe and append it to the ingredient list in the card

@@ -5,6 +5,11 @@ body {
   background-color: #FAFBFF;
 }
 
+.hidden {
+  display: none !important;
+  /* marking it important so it has higher importance than the styling in media query. This to make classList toggle in JS to work */
+}
+
 .top-container {
   display: flex;
   justify-content: flex-end;
@@ -25,7 +30,6 @@ body {
 .favorite-button .fas.fa-heart {
   color: #FF6589;;
 }
-
 
 .title {
   color: #0018A4;
@@ -103,7 +107,15 @@ body {
  font-style: medium;
  font-size: 15px;
  overflow: hidden;
+ display: flex;
+ flex-direction: column;
 }
+
+.recipe-content {
+  flex: 1;
+}
+
+
 
 .heart-icon-container {
   display: flex;
@@ -147,6 +159,56 @@ body {
   border: 2px solid #0018A4;
   box-shadow: 0px 0px 30px 0px rgba(0, 24, 164, 0.2);
 }
+
+.modal-overlay {
+  display: flex;
+  flex-direction: column;
+  position: fixed; /* stay in place */
+  z-index: 1; /* sit on top */
+  left: 0;
+  top: 0;
+  width: 100vw; /* full width */
+  height: 100vh; /* full height */
+  background-color: rgba(0,0,0,0.4);
+}
+
+.modal-overlay .cross-icon {
+  width: 60px;
+  align-self: end;
+}
+
+.modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: fixed; /* stay in place */
+  z-index: 1; /* sit on top */
+  left: 10%;
+  right: 10%;
+  height: 80vh;
+  top: 0;
+  margin: 70px auto;
+  overflow: auto; /* enable scroll if needed */
+  border-radius: 5px;
+  background-color: rgb(247, 244, 241);
+  padding: 20px;
+  max-width: 700px;
+}
+
+.modal img {
+  width: 70%;
+  box-shadow: 0 0 2px grey;
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding: 12px 20px 20px 20px;
+}
+
 
 .filter-error-message {
   background-color: #ffffff;

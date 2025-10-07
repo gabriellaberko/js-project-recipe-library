@@ -44,8 +44,15 @@
     </div>
   </div>
   <div class="card-container" id="card-container">
-    <div class="card" id="placeholder">
-      <h2>Temporary placeholder for filter/sorting options</h2>
+    <div class="modal-overlay hidden" id="modalOverlay">
+      <img 
+      class="cross-icon" 
+      id="modalCrossIcon" 
+      src="./cross-white.svg" alt="cross icon">
+      <div class="modal" id="modalPopup">
+        <div class="modal-content" id="modalContent">
+        </div>
+      </div>
     </div>
   </div>
   <script src="./script.js"></script>
