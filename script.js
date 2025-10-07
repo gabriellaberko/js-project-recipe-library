@@ -125,56 +125,6 @@ const showRecipeCards = (recipeArray) => {
   });
 };
 
-// const showRecipeCards = (recipeArray) => {
-  
-//   //reset card container before filling it
-//   cardContainer.innerHTML = "";
-
-//   if(!recipeArray || recipeArray.length === 0) {
-//     cardContainer.innerHTML = `<p class="filter-error-message">Oh no!🥲 Unfortunately there are no recipes matching your current filter. Try another one!</p>`;
-//   }
-
-//   recipeArray.forEach((recipe) => {
-
-//     const card = document.createElement("div");
-//     card.classList.add("card");
-//     card.dataset.id = recipe.id;
-
-//     const heartIconStatus = recipe.markedAsFavorite ? "fas" : "far";
-
-//     // create elements in each card with content from each recipe
-//     card.innerHTML += `
-//       <div class="heart-icon-container">
-//       <i class="${heartIconStatus} fa-heart" style="font-size:24px;"></i>
-//       </div>
-//       <img src=${recipe.image} alt=${recipe.title}>
-//       <h3>${recipe.title}</h3>
-//       <hr class="solid"
-//       <div class="recipe-information">
-//         <p><b>Cuisine:</b> ${recipe.cuisine}</p>
-//         <p><b>Time:</b> ${recipe.readyInMinutes} min</p>
-//         <p class="popularity"><b>Popularity:</b> ${recipe.popularity}</p>
-//       </div>
-//       <hr class="solid">
-//       <div class="ingredients">
-//         <h4>Ingredients:</h4>
-//         <ul class="ingredient-list"></ul>
-//       </div>
-//     `
-    
-//     // create a <li> for every ingredient in each recipe and append it to the ingredient list in the card
-//     recipe.ingredients.forEach((ing) => {
-//       const eachIngredient = document.createElement("li");
-//       eachIngredient.textContent = ing;
-//       const ingredientList = card.querySelector(".ingredient-list");
-//       ingredientList.appendChild(eachIngredient);       
-//     });
-
-//    // append the card to the card container
-//    cardContainer.appendChild(card);
-//   });
-// };
-
 
 const filterCardsOnKitchen = activeFilters => {
   // if there is no active filters (all button is active), or in case activeFilters is undefined

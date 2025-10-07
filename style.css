@@ -50,6 +50,12 @@ body {
   margin-bottom: 24px;
 }
 
+.filter-buttons-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
 .btn {
   border-radius: 50px;
   padding: 8px 16px;
@@ -198,11 +204,7 @@ body {
 }
 
 .filter-buttons-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 7px;
   justify-content: center;
-  
 }
 
 .card-container {
@@ -214,7 +216,7 @@ body {
 }
 
 /* For wide screens */
-@media only screen and (min-width: 1180px) {
+ @media only screen and (min-width: 1350px) {
   
   .controls-container{
     flex-direction: row;
