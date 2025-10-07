@@ -188,14 +188,23 @@ body {
   margin: 70px auto;
   overflow: auto; /* enable scroll if needed */
   border-radius: 5px;
-  background-color: rgb(247, 244, 241);
+  background-color: #FAFBFF;
   padding: 20px;
   max-width: 700px;
+  border-radius: 16px;
+}
+
+.modal .recipe-content {
+  display: flex;
+  flex-direction: column;
 }
 
 .modal img {
-  width: 70%;
+  width: 80%;
+  border-radius: 12px;
   box-shadow: 0 0 2px grey;
+  align-self: center;
+  margin-bottom: 20px;
 }
 
 .modal-content {
@@ -207,6 +216,23 @@ body {
   padding: 12px 20px 20px 20px;
 }
 
+.modal hr.solid {
+  width: 100%;
+  border-top: 1px solid #888;
+}
+
+.modal .recipe-instruction{
+  margin-bottom: 20px;
+}
+
+.modal .recipe-information{
+  margin-bottom: 0px;
+}
+
+
+.modal ol li {
+  margin-bottom: 10px;;
+}
 
 .filter-error-message {
   background-color: #ffffff;
@@ -216,15 +242,24 @@ body {
   align-items: center;
 }
 
+/* for mobile screens */
 @media only screen and (max-width: 420px) {
   .top-container{
     flex-direction: column;
     justify-content: center;
     max-width: 200px;
   }
+  
+  .modal .ingredients ul {
+    column-count: 1;
+  }
+
+  .modal .ingredients ul li {
+    margin-bottom: 10px;
+  }
 }
 
-/* For small screens */
+/* for smaller screens */
 @media only screen and (max-width: 650px) {
 
 .title {
@@ -273,9 +308,18 @@ body {
   grid-gap: 16px;
   justify-content: space-evenly;
 }
+
+.modal .ingredients ul {
+  column-count: 1;
 }
 
-/* For wide screens */
+.modal .ingredients ul li {
+  margin-bottom: 10px;
+}
+
+}
+
+/* for wide screens */
  @media only screen and (min-width: 1350px) {
   
   .controls-container{
