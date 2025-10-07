@@ -99,7 +99,6 @@ body {
 }
 
 .card {
- /*height: 650px;*/
  border: 1px solid #E9E9E9;
  border-radius: 16px;
  padding: 12px;
@@ -113,6 +112,15 @@ body {
 
 .recipe-content {
   flex: 1;
+}
+
+.card-button {
+  max-width: 200px;
+  margin: 20px;
+  align-self: center;
+  outline: 2px solid rgb(103, 102, 102);
+  background-color: transparent;
+  color:  rgb(103, 102, 102);
 }
 
 .heart-icon-container {

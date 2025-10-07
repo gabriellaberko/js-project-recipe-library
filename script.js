@@ -119,7 +119,7 @@ const showRecipeCards = (recipeArray) => {
           <ul class="ingredient-list"></ul>
         </div>
       </div>
-      <button class="card-button">Read more</button>
+      <button class="card-button btn">Read more</button>
     `
     
     // create a <li> for every ingredient in each recipe and append it to the ingredient list in the card
