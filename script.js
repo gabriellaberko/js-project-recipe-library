@@ -1,6 +1,6 @@
 // global variables
 const apiKey = "cf8d763903c74744a4d13c68cc9aa6c8";
-const url = `https://api.spoonacular.com/recipes/random?number=10&apiKey=${apiKey}`;
+const url = `https://api.spoonacular.com/recipes/random?number=50&apiKey=${apiKey}`;
 let activeFilters = [];
 let favoriteRecipes = [];
 let allRecipes = [];
@@ -11,6 +11,7 @@ const filterButtons = document.querySelectorAll(".filter-container .btn");
 const sortButtons = document.querySelectorAll(".sort-container .btn");
 const randomButton = document.getElementById("random-button");
 const favoriteButton = document.getElementById("favorite-button");
+const searchButton = document.getElementById("search-button");
 const cardContainer = document.getElementById("card-container");
 const favoriteRecipeHearts = document.querySelectorAll(".card-container .fa-heart");
 
@@ -197,6 +198,18 @@ const updateFavoriteRecipes = (recipeId, recipeIsLiked) => {
 };
 
 
+const filterCardsOnSearch = liveInputText => {
+  if (liveInputText && liveInputText.length > 0) {
+    filteredCards = allRecipes.filter(recipe => (recipe.title.toLowerCase()).includes(liveInputText.toLowerCase()));
+    showRecipeCards(filteredCards);
+  } else {
+    showRecipeCards(allRecipes);
+  }
+};
+
+
+// event listeners
+
 document.addEventListener("DOMContentLoaded", () => {
   fetchData();
 });
@@ -259,7 +272,6 @@ randomButton.addEventListener("click", () => {
 });
 
 
-
 // set click listener on cardContainer that always exist in the DOM, since the card and heart icons are added dynamically 
 cardContainer.addEventListener("click", (e) => {
   // e.target is the DOM element that was clicked.
@@ -280,8 +292,13 @@ cardContainer.addEventListener("click", (e) => {
 
 
 
-
 favoriteButton.addEventListener("click", () => {
   showRecipeCards(favoriteRecipes);
   allButtons.forEach((button) => button.classList.remove("active"));
+});
+
+
+searchButton.addEventListener("input",(e) =>{
+  const liveInputText = e.target.value;
+  filterCardsOnSearch(liveInputText);
 });
