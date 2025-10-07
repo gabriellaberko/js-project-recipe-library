@@ -140,6 +140,23 @@ function openCloseModal() {
   modalOverlay.classList.toggle("hidden");
 };
 
+function showCardInModal(cardButton) {
+  // find the card which button was clicked
+  const clickedCard = cardButton.closest(".card"); 
+    
+  // copy its inner HTML into modal-content
+  modalContent.innerHTML = clickedCard.innerHTML;
+
+  // remove the card's inital ("read more") button
+  modalContent.querySelector(".card-button").remove();
+  modalContent.querySelector(".heart-icon-container").remove();
+  modalContent.querySelector(".recipe-content .recipe-summary").classList.toggle("hidden");
+
+
+  // add the recipe's instructions and ingredients
+  modalContent.querySelector(".recipe-content .recipe-instruction").classList.toggle("hidden");
+  modalContent.querySelector(".recipe-content .ingredients").classList.toggle("hidden");
+};
 
 
 const filterCardsOnKitchen = activeFilters => {
@@ -316,6 +333,7 @@ cardContainer.addEventListener("click", (e) => {
   if (!cardButton) return;
 
   openCloseModal();
+  showCardInModal(cardButton);
 });
 
 
