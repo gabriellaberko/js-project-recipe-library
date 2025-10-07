@@ -2,7 +2,7 @@
 const apiKey = "cf8d763903c74744a4d13c68cc9aa6c8";
 const url = `https://api.spoonacular.com/recipes/random?number=50&apiKey=${apiKey}`;
 let activeFilters = [];
-let favoriteRecipes = [];
+let favoriteRecipes = JSON.parse(localStorage.getItem("favoriteRecipes")) || [];
 let allRecipes = [];
 
 // DOM elements
@@ -82,6 +82,7 @@ const showRecipeCards = (recipeArray) => {
     card.classList.add("card");
     card.dataset.id = recipe.id;
 
+    // TO DO: if recipe id matches recipe id in favoriteRecipes in local storage: "fas": "far"
     const heartIconStatus = recipe.markedAsFavorite ? "fas" : "far";
 
     // create elements in each card with content from each recipe
@@ -227,6 +228,10 @@ const updateFavoriteRecipes = (recipeId, recipeIsLiked) => {
   // include the recipes where markedAsFavorite is truthy 
   favoriteRecipes = allRecipes.filter(recipe => 
   recipe.markedAsFavorite);
+
+  // save to local storage
+  localStorage.setItem("favoriteRecipes", JSON.stringify(favoriteRecipes));
+
 };
 
 
