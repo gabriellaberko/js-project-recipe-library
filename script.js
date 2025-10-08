@@ -1,6 +1,6 @@
 // global variables
 const apiKey = "cf8d763903c74744a4d13c68cc9aa6c8";
-const url = `https://api.spoonacular.com/recipes/random?number=50&apiKey=${apiKey}`;
+const url = `https://api.spoonacular.com/recipes/random?number=25&apiKey=${apiKey}`;
 let activeFilters = [];
 let favoriteRecipes = JSON.parse(localStorage.getItem("favoriteRecipes")) || [];
 let allRecipes = [];
@@ -82,14 +82,15 @@ const showRecipeCards = (recipeArray) => {
     card.classList.add("card");
     card.dataset.id = recipe.id;
 
-    // TO DO: if recipe id matches recipe id in favoriteRecipes in local storage: "fas": "far"
-    const heartIconStatus = recipe.markedAsFavorite ? "fas" : "far";
+    // check if the recipes id match any id of the recipes in favoriteRecipes, if true set variable to the class for active state for the heart icon
+    const heartIconClass = favoriteRecipes.some(favoriteRecipe => favoriteRecipe.id === recipe.id) ? "fas" : "far";
+
 
     // create elements in each card with content from each recipe
     card.innerHTML += `
       <div class="recipe-content">
         <div class="heart-icon-container">
-        <i class="${heartIconStatus} fa-heart" style="font-size:24px;"></i>
+        <i class="${heartIconClass} fa-heart" style="font-size:24px;"></i>
         </div>
         <img src=${recipe.image} alt=${recipe.title}>
         <h3>${recipe.title}</h3>
@@ -222,17 +223,31 @@ const updateActiveFilters = (buttonText, buttonIsActive) => {
 
 const updateFavoriteRecipes = (recipeId, recipeIsLiked) => {
   clickedRecipe = allRecipes.find(recipe => recipe.id === recipeId);
-  // add the property markedAsFavorite to the recipe in the recipes array with the value of true/false from recipeIsLiked
-  clickedRecipe.markedAsFavorite = recipeIsLiked;
-  
-  // include the recipes where markedAsFavorite is truthy 
-  favoriteRecipes = allRecipes.filter(recipe => 
-  recipe.markedAsFavorite);
+  if (!clickedRecipe) return;
 
-  // save to local storage
-  localStorage.setItem("favoriteRecipes", JSON.stringify(favoriteRecipes));
+  if (recipeIsLiked === true) {
+    // add to favoriteRecipes, if not already there
+    const isAlreadyFavorite = favoriteRecipes.some(favoriteRecipe => favoriteRecipe.id === recipeId);
+    if (!isAlreadyFavorite) favoriteRecipes.push(clickedRecipe);
+  } else {
+    // remove from favorites
+    favoriteRecipes = favoriteRecipes.filter(favoriteRecipe => favoriteRecipe.id !== recipeId);
+  }
 
+  addFavoriteRecipesToLocalStorage();
 };
+
+// to make sure there are no recipes in favoriteRecipes that no longer exist in allrecipes
+const addFavoriteRecipesToLocalStorage = () => {
+// create a set of valid recipe IDs from allRecipes
+const validRecipeIds = new Set(allRecipes.map(recipe => recipe.id));
+
+// filter favoriteRecipes so only recipes that exist in allRecipes is left
+favoriteRecipes = favoriteRecipes.filter(favoriteRecipe => validRecipeIds.has(favoriteRecipe.id));
+
+// save cleaned favoriteRecipes to localStorage
+localStorage.setItem("favoriteRecipes", JSON.stringify(favoriteRecipes));
+}
 
 
 const filterCardsOnSearch = liveInputText => {
