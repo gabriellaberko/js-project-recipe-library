@@ -71,9 +71,13 @@ body {
   color: #0018A4;
 }
 
-.sort-container .btn,
-.random-container .btn {
+.sort-container .btn {
   background-color: #FFECEA;
+  color: #0018A4;
+}
+
+.random-container .btn {
+  background: linear-gradient(90deg,rgba(204, 255, 226, 1) 0%, rgba(255, 236, 234, 1) 80%);
   color: #0018A4;
 }
 
@@ -86,8 +90,12 @@ body {
   color: white;
 }
 
-.sort-container .active,
 .random-container .active {
+  background: #0018A4;
+  color: white;
+}
+
+.sort-container .active {
   background-color: #FF6589;
   color: white;
 }
