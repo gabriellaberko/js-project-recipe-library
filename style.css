@@ -85,7 +85,8 @@ body {
   outline: 2px solid #0018A4;
 }
 
-.filter-container .active {
+.filter-container .active,
+.card-button:hover {
   background-color: #0018A4;
   color: white;
 }
@@ -127,9 +128,9 @@ body {
   max-width: 200px;
   margin: 20px;
   align-self: center;
-  outline: 2px solid rgb(103, 102, 102);
+  outline: 2px solid #0018A4;
   background-color: transparent;
-  color:  rgb(103, 102, 102);
+  color:  #0018A4;
 }
 
 .heart-icon-container {
