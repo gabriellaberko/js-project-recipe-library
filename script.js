@@ -20,50 +20,57 @@ const modalCrossIcon = document.getElementById("cross-icon");
 
 
 // fetch data from API
-const fetchData = () => {
+const fetchData = async () => {
   // create a variable with data from local storage. Set fallback to empty array so value is never null
   const storedRecipes = JSON.parse(localStorage.getItem("recipes")) || [];  
 
-  fetch(url)
+  // show loading state when fetching data
+  let fetchLoadingState = true; 
 
-    .then(response => {
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-      return response.json();
-    })
+  if (fetchLoadingState === true){
+    cardContainer.innerHTML = `<p>Loading...</p>`;
+  }
+  
+  try {
+    const response = await fetch(url);
 
-    .then(data => {
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
 
-      const fetchedRecipes = data.recipes;
-
-      // if fetch is successful, save it to local storage and update allRecipes
-      if(fetchedRecipes && fetchedRecipes.length > 0 ) {
-        localStorage.setItem("recipes", JSON.stringify(fetchedRecipes));
-        allRecipes = fetchedRecipes;
-      // if the fetch has no data (empty array), update allRecipes with data from local storage
-      } else {
-        allRecipes = storedRecipes;
-      }
-
-      if (allRecipes.length > 0) {
-        showRecipeCards(allRecipes);
-      } else {
-        cardContainer.innerHTML = `<p class="filter-error-message">No recipes found locally or from API.</p>`;
-      }
+    const data = await response.json();
     
-    })
-    // if fetch fails
-    .catch(error => {
-      console.error('Fetch error:', error);
-      // update allRecipes with data from local storage
+    const fetchedRecipes = data.recipes;
+
+    // turn off loading state
+    fetchLoadingState = false;
+
+    // if fetch is successful, save it to local storage and update allRecipes
+    if(fetchedRecipes && fetchedRecipes.length > 0 ) {
+      localStorage.setItem("recipes", JSON.stringify(fetchedRecipes));
+      allRecipes = fetchedRecipes;
+    // if the fetch has no data (empty array), update allRecipes with data from local storage
+    } else {
       allRecipes = storedRecipes;
-      if (allRecipes.length > 0) {
-        showRecipeCards(allRecipes);
-      } else {
-        cardContainer.innerHTML = `<p class="filter-error-message">No recipes found locally or from API.</p>`;
-      }
-    })
+    }
+
+    if (allRecipes.length > 0) {
+      showRecipeCards(allRecipes);
+    } else {
+      cardContainer.innerHTML = `<p class="filter-error-message">No recipes found locally or from API.</p>`;
+    }
+  }
+  // if fetch fails
+  catch(error) {
+    console.error('Fetch error:', error);
+    // update allRecipes with data from local storage
+    allRecipes = storedRecipes;
+    if (allRecipes.length > 0) {
+      showRecipeCards(allRecipes);
+    } else {
+    cardContainer.innerHTML = `<p class="filter-error-message">No recipes found locally or from API.</p>`;
+    }
+  }
 };
 
 
