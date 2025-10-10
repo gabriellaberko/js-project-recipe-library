@@ -264,22 +264,7 @@ body {
   align-items: center;
 }
 
-/* for mobile screens */
-@media only screen and (max-width: 420px) {
-  .top-container{
-    flex-direction: column;
-    justify-content: center;
-    max-width: 200px;
-  }
-  
-  .modal .ingredients ul {
-    column-count: 1;
-  }
 
-  .modal .ingredients ul li {
-    margin-bottom: 10px;
-  }
-}
 
 /* for small screens */
 @media only screen and (max-width: 650px) {
@@ -290,8 +275,11 @@ body {
 }
 
 .top-container{
+  flex-direction: column; 
   justify-content: center;
-  margin-bottom: 70px;
+  max-width: 250px;
+  margin: 0 auto;
+
 }
 
 .controls-container {
