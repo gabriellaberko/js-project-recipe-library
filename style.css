@@ -28,7 +28,12 @@ body {
 }
 
 .favorite-button .fas.fa-heart {
-  color: #FF6589;;
+  color: #FF6589;
+}
+
+.favorite-button.active {
+  background-color: #0018A4;
+  color: white;
 }
 
 .title {

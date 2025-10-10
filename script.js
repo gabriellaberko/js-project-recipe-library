@@ -11,6 +11,7 @@ const filterButtons = document.querySelectorAll(".filter-container .btn");
 const sortButtons = document.querySelectorAll(".sort-container .btn");
 const randomButton = document.getElementById("random-button");
 const favoriteButton = document.getElementById("favorite-button");
+const favoriteButtonHeart = document.getElementById("favorite-button-heart");
 const searchButton = document.getElementById("search-button");
 const cardContainer = document.getElementById("card-container");
 const favoriteRecipeHearts = document.querySelectorAll(".card-container .fa-heart");
@@ -376,9 +377,15 @@ modalCrossIcon.addEventListener("click", openCloseModal);
 
 
 favoriteButton.addEventListener("click", () => {
-  showRecipeCards(favoriteRecipes);
-  // remove active state for all other filter and sort buttons
-  allButtons.forEach((button) => button.classList.remove("active"));
+  const favoriteButtonIsActive = favoriteButton.classList.toggle("active");
+
+  // remove active state from all other buttons
+  allButtons.forEach((button) => {
+    if(button !== favoriteButton) button.classList.remove("active");
+  });
+  
+  showRecipeCards(favoriteButtonIsActive ? favoriteRecipes: allRecipes);
+
 });
 
 
