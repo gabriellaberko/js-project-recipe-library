@@ -7,7 +7,7 @@ body {
 
 .hidden {
   display: none !important;
-  /* marking it important so it has higher importance than the styling in media query. This to make classList toggle in JS to work */
+  /* marking it important to make classList toggle in JS to work */
 }
 
 .top-container {
@@ -120,19 +120,6 @@ body {
  flex-direction: column;
 }
 
-.recipe-content {
-  flex: 1;
-}
-
-.card-button {
-  max-width: 200px;
-  margin: 20px;
-  align-self: center;
-  outline: 2px solid #0018A4;
-  background-color: transparent;
-  color:  #0018A4;
-}
-
 .heart-icon-container {
   display: flex;
   justify-content: flex-end;
@@ -151,6 +138,16 @@ body {
   color: #FF6589;;
 }
 
+.card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.recipe-content {
+  flex: 1;
+}
 
 .recipe-information {
   font-size: 14px;
@@ -164,11 +161,13 @@ body {
   column-gap: 1rem;
 }
 
-.card img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  border-radius: 12px;
+.card-button {
+  max-width: 200px;
+  margin: 20px;
+  align-self: center;
+  outline: 2px solid #0018A4;
+  background-color: transparent;
+  color:  #0018A4;
 }
 
 .card:hover {
@@ -191,6 +190,7 @@ body {
 .modal-overlay .cross-icon {
   width: 60px;
   align-self: end;
+  margin-right: 24px;
 }
 
 .modal {
@@ -212,11 +212,6 @@ body {
   border-radius: 16px;
 }
 
-.modal .recipe-content {
-  display: flex;
-  flex-direction: column;
-}
-
 .modal img {
   width: 80%;
   border-radius: 12px;
@@ -234,9 +229,9 @@ body {
   padding: 12px 20px 20px 20px;
 }
 
-.modal hr.solid {
-  width: 100%;
-  border-top: 1px solid #888;
+.modal .recipe-content {
+  display: flex;
+  flex-direction: column;
 }
 
 .modal .recipe-instruction{
@@ -247,9 +242,13 @@ body {
   margin-bottom: 0px;
 }
 
-
 .modal ol li {
   margin-bottom: 10px;;
+}
+
+.modal hr.solid {
+  width: 100%;
+  border-top: 1px solid #888;
 }
 
 .filter-error-message {
@@ -277,7 +276,7 @@ body {
   }
 }
 
-/* for smaller screens */
+/* for small screens */
 @media only screen and (max-width: 650px) {
 
 .title {

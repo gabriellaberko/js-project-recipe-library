@@ -65,6 +65,7 @@ const fetchData = async () => {
     console.error('Fetch error:', error);
     // update allRecipes with data from local storage
     allRecipes = storedRecipes;
+
     if (allRecipes.length > 0) {
       showRecipeCards(allRecipes);
     } else {
@@ -89,7 +90,7 @@ const showRecipeCards = (recipeArray) => {
     card.classList.add("card");
     card.dataset.id = recipe.id;
 
-    // check if the recipes id match any id of the recipes in favoriteRecipes, if true set variable to the class for active state for the heart icon
+    // check if the recipes id match any id of the recipes in favoriteRecipes. If true, set the variable to the class of active state for the heart icon
     const heartIconClass = favoriteRecipes.some(favoriteRecipe => favoriteRecipe.id === recipe.id) ? "fas" : "far";
 
 
@@ -113,14 +114,14 @@ const showRecipeCards = (recipeArray) => {
         </div>
         <hr class="solid">
         <div class="recipe-summary">
-          <p>${recipe.summary.split('. ').slice(0, 2).join('. ') + '.'}</p>
+          <p>${recipe.summary.split(". ").slice(0, 2).join(". ") + "."}</p>
         </div>
         <div class="recipe-instruction hidden">
           <h4>Instructions:</h4>
           <ol>
           ${recipe.analyzedInstructions[0].steps
             .map(step => `<li>${step.step}</li>`)
-            .join('')}
+            .join("")}
           </ol>
         </div>
         <div class="ingredients hidden">
@@ -140,7 +141,7 @@ const showRecipeCards = (recipeArray) => {
     });
 
    // append the card to the card container
-   cardContainer.appendChild(card);
+    cardContainer.appendChild(card);
   });
 };
 
@@ -149,27 +150,27 @@ function openCloseModal() {
   modalOverlay.classList.toggle("hidden");
 };
 
+
 function showCardInModal(cardButton) {
   // find the card which button was clicked
   const clickedCard = cardButton.closest(".card"); 
     
-  // copy its inner HTML into modal-content
+  // copy its inner HTML into the modal content
   modalContent.innerHTML = clickedCard.innerHTML;
 
-  // remove the card's inital ("read more") button
+  // remove some intial elements from the card
   modalContent.querySelector(".card-button").remove();
   modalContent.querySelector(".heart-icon-container").remove();
   modalContent.querySelector(".recipe-content .recipe-summary").classList.toggle("hidden");
 
-
-  // add the recipe's instructions and ingredients
+  // make the recipe's instructions and ingredients visible
   modalContent.querySelector(".recipe-content .recipe-instruction").classList.toggle("hidden");
   modalContent.querySelector(".recipe-content .ingredients").classList.toggle("hidden");
 };
 
 
 const filterCardsOnKitchen = activeFilters => {
-  // if there is no active filters (all button is active), or in case activeFilters is undefined
+  // if there are no active filters (all button is active), or if undefined
   if (!activeFilters || activeFilters.length === 0)  {
     const filteredCards = [];
     showRecipeCards(allRecipes);
@@ -183,10 +184,10 @@ const filterCardsOnKitchen = activeFilters => {
 };
 
 
-const sortCardsOnTime = buttonText => {
+const sortCardsOnCookingTime = buttonText => {
   // create an array of the cards
-  const cardArray = [...document.querySelectorAll(".card")];
-  // get the popularity of each card
+  const sortedCardArray = [...document.querySelectorAll(".card")];
+  // get the cooking time of each card
   const getTime = (card) => {
     const text = card.querySelector(".time").textContent;
      // extract and return the number from it
@@ -194,7 +195,7 @@ const sortCardsOnTime = buttonText => {
     return number ? parseInt(number[0], 10) : 0;
   };
 
-    cardArray.sort((a, b) => {
+  sortedCardArray.sort((a, b) => {
     if (buttonText === "Descending") {
       return getTime(b) - getTime(a);
     } else if (buttonText === "Ascending") {
@@ -204,7 +205,7 @@ const sortCardsOnTime = buttonText => {
 
     // re-append the cards in sorted order
     const cardContainer = document.getElementById("card-container");
-    cardArray.forEach((card) => 
+    sortedCardArray.forEach((card) => 
       cardContainer.appendChild(card)
     );
 };
@@ -228,28 +229,32 @@ const updateActiveFilters = (buttonText, buttonIsActive) => {
   return activeFilters;
 }
 
+
 const updateFavoriteRecipes = (recipeId, recipeIsLiked) => {
+  // find the corresponding recipe (in allRecipes) for the clicked card by comparing their recipe ID's
   clickedRecipe = allRecipes.find(recipe => recipe.id === recipeId);
   if (!clickedRecipe) return;
 
   if (recipeIsLiked === true) {
-    // add to favoriteRecipes, if not already there
+    // add that recipe to favoriteRecipes, if not already there
     const isAlreadyFavorite = favoriteRecipes.some(favoriteRecipe => favoriteRecipe.id === recipeId);
     if (!isAlreadyFavorite) favoriteRecipes.push(clickedRecipe);
   } else {
-    // remove from favorites
+    // remove that recipe from favorites
     favoriteRecipes = favoriteRecipes.filter(favoriteRecipe => favoriteRecipe.id !== recipeId);
   }
 
   addFavoriteRecipesToLocalStorage();
 };
 
+
 // to make sure there are no recipes in favoriteRecipes that no longer exist in allrecipes
+
 const addFavoriteRecipesToLocalStorage = () => {
 // create a set of valid recipe IDs from allRecipes
 const validRecipeIds = new Set(allRecipes.map(recipe => recipe.id));
 
-// filter favoriteRecipes so only recipes that exist in allRecipes is left
+// filter favoriteRecipes so only recipes that exist in allRecipes are left
 favoriteRecipes = favoriteRecipes.filter(favoriteRecipe => validRecipeIds.has(favoriteRecipe.id));
 
 // save cleaned favoriteRecipes to localStorage
@@ -257,9 +262,10 @@ localStorage.setItem("favoriteRecipes", JSON.stringify(favoriteRecipes));
 }
 
 
+
 const filterCardsOnSearch = liveInputText => {
   if (liveInputText && liveInputText.length > 0) {
-    filteredCards = allRecipes.filter(recipe => (recipe.title.toLowerCase()).includes(liveInputText.toLowerCase()));
+    const filteredCards = allRecipes.filter(recipe => (recipe.title.toLowerCase()).includes(liveInputText.toLowerCase()));
     showRecipeCards(filteredCards);
   } else {
     showRecipeCards(allRecipes);
@@ -278,7 +284,6 @@ document.addEventListener("DOMContentLoaded", () => {
 filterButtons.forEach(filterButton => {
   filterButton.addEventListener("click", () => {
     const buttonText = filterButton.innerText;
-    
     // if the clicked button is "All", remove the class "active" from all the other buttons
     if(buttonText === "All") {
       allButtons.forEach((button) => button.classList.remove("active"));
@@ -293,6 +298,7 @@ filterButtons.forEach(filterButton => {
       randomButton.classList.remove("active");
     }
 
+    // create a variable to know if button is currently active
     const buttonIsActive = filterButton.classList.contains("active");
 
     updateActiveFilters(buttonText, buttonIsActive);
@@ -303,22 +309,22 @@ filterButtons.forEach(filterButton => {
 
 sortButtons.forEach(sortButton => {
   sortButton.addEventListener("click", () => {
-    // remove the class 'active' from all sort buttons
+    // remove active state from all sort buttons
     sortButtons.forEach((sortButton) => sortButton.classList.remove("active"));
-
+    
     sortButton.classList.add("active");
     
     const buttonText = sortButton.innerText;
-    // only call the sortCards function if button is clicked to active
+    // if button is clicked to active
     if (sortButton.classList.contains("active")) {
-      sortCardsOnTime(buttonText);
+      sortCardsOnCookingTime(buttonText);
     }
   });
 }); 
 
 
 randomButton.addEventListener("click", () => {
-  // remove the class "active" from all buttons
+  // remove the active state from all buttons
   allButtons.forEach((button) => button.classList.remove("active"));
 
   randomButton.classList.toggle("active");
@@ -333,8 +339,9 @@ randomButton.addEventListener("click", () => {
 
 // set click listener on cardContainer that always exist in the DOM, since the card and heart icons are added dynamically 
 cardContainer.addEventListener("click", (e) => {
-  // e.target is the DOM element that was clicked.
+  // the closest heart of clicked element (e.target is the DOM element that was clicked)
   const heartIcon = e.target.closest(".far, .fas");
+   // the recipe id of the closest card of the clicked element
   const recipeId = parseInt(e.target.closest(".card").dataset.id);
 
   // exit if the click is not the heart icon
@@ -370,6 +377,7 @@ modalCrossIcon.addEventListener("click", openCloseModal);
 
 favoriteButton.addEventListener("click", () => {
   showRecipeCards(favoriteRecipes);
+  // remove active state for all other filter and sort buttons
   allButtons.forEach((button) => button.classList.remove("active"));
 });
 
